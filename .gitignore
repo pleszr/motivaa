@@ -11,6 +11,12 @@
 # Environment variables
 *.env
 
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
