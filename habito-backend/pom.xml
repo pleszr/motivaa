@@ -13,7 +13,7 @@
         <spring-boot.version>3.2.5</spring-boot.version>
     </properties>
     <modules>
-        <module>habito-backend</module>
+        <module>habito-app</module>
     </modules>
     <dependencyManagement>
         <dependencies>

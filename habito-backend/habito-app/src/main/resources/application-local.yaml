@@ -4,10 +4,10 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db-changelog-master.yaml
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/habito
-    username: habito_admin
-    password: hadmin
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 logging:
   level:
-    liquibase: DEBUG
+    liquibase: trace
