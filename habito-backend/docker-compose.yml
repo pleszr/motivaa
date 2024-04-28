@@ -4,7 +4,7 @@ services:
     container_name: sampleContainerName
     build:
       context: .
-      dockerfile: .Dockerfile
+      dockerfile: Dockerfile
     environment:
       - SAMPLE_ENV_VAR=sampleValue
     ports:

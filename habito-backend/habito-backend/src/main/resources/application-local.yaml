@@ -1,2 +1,13 @@
 server:
   port: 8093
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/db-changelog-master.yaml
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/db_example
+    username: springuser
+    password: ThePassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  level:
+    liquibase: DEBUG
