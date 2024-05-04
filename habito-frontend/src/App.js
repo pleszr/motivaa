@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import withAuth from './auth/withAuth';
 
 class App extends React.Component {
   state = {

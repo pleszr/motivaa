@@ -1,0 +1,6 @@
+keycloak.auth-server-url=http://localhost:8080/auth
+keycloak.realm=YourRealm ## We need to come up with a Realm
+keycloak.resource=your-client-id  ## Client-id
+keycloak.credentials.secret=your-client-secret ## Client-secret
+keycloak.bearer-only=true
+keycloak.use-resource-role-mappings=true
