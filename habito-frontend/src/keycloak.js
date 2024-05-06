@@ -1,11 +1,16 @@
+// src/keycloak.js
 import Keycloak from 'keycloak-js';
 
 const keycloakConfig = {
-  url: 'YOUR_KEYCLOAK_URL', 
-  realm: 'YOUR_REALM', 
-  clientId: 'YOUR_CLIENT_ID'
+  url: 'http://localhost:8080',
+  realm: 'habito',
+  clientId: 'login',
 };
 
 const keycloak = new Keycloak(keycloakConfig);
 
 export default keycloak;
+
+
+
+

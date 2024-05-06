@@ -1,21 +1,17 @@
 import React from 'react';
-import keycloak from './keycloak';
+import {useKeycloak} from '@react-keycloak/web';
 
 const withAuth = (WrappedComponent) => {
-  return class extends React.Component {
-    componentDidMount() {
-      keycloak.init({ onLoad: 'login-required' }).then(authenticated => {
-        if (!authenticated) {
-          window.location.reload();
-        }
-        // Continue with rendering or redirect
-      });
+  return (props) => {
+    const {keycloak, initialized} = useKeycloak();
+
+    if (!initialized || !keycloak.authenticated) {
+      return <div>Loading or not authenticated...</div>;
     }
 
-    render() {
-      return <WrappedComponent {...this.props} />;
-    }
+    return <WrappedComponent {...props} />;
   };
 };
 
 export default withAuth;
+
