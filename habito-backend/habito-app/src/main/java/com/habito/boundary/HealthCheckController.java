@@ -27,7 +27,8 @@ public class HealthCheckController {
     public ResponseEntity<Map<String, String>> healthChecker(){
         log.trace("healthcheck successful");
         Map<String, String> response = new HashMap<>();
-        response.put("message", "cica2: healthcheck successful");
+        response.put("healthStatus", "ok");
+        response.put("customMessage", "cica");
         return ResponseEntity.ok(response);
     }
 
