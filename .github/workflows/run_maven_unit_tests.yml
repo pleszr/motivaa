@@ -31,3 +31,5 @@ jobs:
       run: |
         cd habito-backend/
         mvn test
+    - name: maven !version!
+      run: mvn -v
