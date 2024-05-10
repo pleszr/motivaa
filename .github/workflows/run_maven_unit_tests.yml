@@ -30,5 +30,4 @@ jobs:
     - name: run backend unit tests with maven
       run: |
         cd habito-backend/
-        mvn -B package --file pom.xml
         mvn test
