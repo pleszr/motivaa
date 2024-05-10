@@ -27,11 +27,8 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: run backend unit tests with maven
       run: |
         cd habito-backend/
         mvn -B package --file pom.xml
-    - name: Run unit tests
-      run: |
-        cd habito-backend/
         mvn test
