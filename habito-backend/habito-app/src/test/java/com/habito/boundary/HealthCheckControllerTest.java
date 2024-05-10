@@ -28,10 +28,8 @@ public class HealthCheckControllerTest {
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-
         String healthStatusFromJson = JsonPath.read(responseJson, "$.healthStatus");
         assertEquals("ok", healthStatusFromJson, "Healthcheck endpoint should give ok, but it didnt");
-
         verifyNoInteractions(habitoService);
     }
 }
