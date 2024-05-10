@@ -32,4 +32,10 @@ public class HealthCheckControllerTest {
         assertEquals("ok", healthStatusFromJson, "Healthcheck endpoint should give ok, but it didnt");
         verifyNoInteractions(habitoService);
     }
+
+    @Test
+    void testTests() throws Exception {
+        System.out.println("---Test Test is running...");
+        assertEquals(1, 1, "Test should pass");
+    }
 }
