@@ -7,8 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="habito-backend" />
+        <module name="habito-app" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="habito-backend" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>
