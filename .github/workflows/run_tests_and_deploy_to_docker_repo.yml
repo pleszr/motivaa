@@ -1,5 +1,4 @@
 # This workflow will build a Java project with Maven and run the unit tests, then deploy the backend to Docker repo
-# TBD maven chaching
 
 name: Run unit tests and deploy to Docker repo
 

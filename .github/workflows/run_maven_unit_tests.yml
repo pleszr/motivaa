@@ -1,5 +1,4 @@
 # This workflow will build a Java project with Maven and run the unit tests
-# TBD maven chaching
 
 name: Run unit tests after every commit
 
