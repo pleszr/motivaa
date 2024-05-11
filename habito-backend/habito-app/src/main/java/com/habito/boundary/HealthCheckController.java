@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,5 +37,11 @@ public class HealthCheckController {
     public ResponseEntity<User> playground(){
         User user = habitoService.createRandomUser();
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/authTest")
+    @PreAuthorize("hasRole('ROLE_ADMIN')") // Need to configure this..
+    public ResponseEntity<String> adminOnly() {
+        return ResponseEntity.ok("Only admin can see this.");
     }
 }

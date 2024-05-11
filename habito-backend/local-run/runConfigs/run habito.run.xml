@@ -2,7 +2,7 @@
   <configuration default="false" name="run habito" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ACTIVE_PROFILES" value="local" />
     <option name="envFilePaths">
-      <option value="$PROJECT_DIR$/habito-backend/habito-app/.env" />
+      <option value="$PROJECT_DIR$/habito-app/.env" />
     </option>
     <module name="habito-app" />
     <selectedOptions>

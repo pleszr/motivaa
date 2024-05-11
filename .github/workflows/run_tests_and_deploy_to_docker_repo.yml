@@ -10,9 +10,9 @@ name: Run unit tests and deploy to Docker repo
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "**" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "**" ]
 
 jobs:
   run_unit_tests:
