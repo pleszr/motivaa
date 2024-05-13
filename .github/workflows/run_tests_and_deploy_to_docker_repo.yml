@@ -1,18 +1,12 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+# This workflow will build a Java project with Maven and run the unit tests, then deploy the backend to Docker repo
 
 name: Run unit tests and deploy to Docker repo
 
 on:
   push:
-    branches: [ "**" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "**" ]
+    branches: [ "main" ]
 
 jobs:
   run_unit_tests:
@@ -39,7 +33,7 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v6
         name: Build & push Docker image
         with:
-          image: rplesz/motivaa
+          image: rplesz/motivaa-backend
           tags: v1, latest
           registry: docker.io
           dockerfile: ./habito-backend/Dockerfile

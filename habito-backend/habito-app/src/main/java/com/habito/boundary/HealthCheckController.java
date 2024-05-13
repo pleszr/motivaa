@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +39,7 @@ public class HealthCheckController {
     }
 
     @GetMapping("/authTest")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") // Need to configure this..
+    //@PreAuthorize("hasRole('ROLE_ADMIN')") // Need to configure this
     public ResponseEntity<String> adminOnly() {
         return ResponseEntity.ok("Only admin can see this.");
     }
