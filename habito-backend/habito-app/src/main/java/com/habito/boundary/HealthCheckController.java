@@ -4,6 +4,7 @@ import com.habito.control.HabitoService;
 import com.habito.entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,8 +40,8 @@ public class HealthCheckController {
     }
 
     @GetMapping("/authTest")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')") // Need to configure this
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<String> adminOnly() {
-        return ResponseEntity.ok("Only admin can see this.");
+        return ResponseEntity.ok("Only authenticated users can see this.");
     }
 }
