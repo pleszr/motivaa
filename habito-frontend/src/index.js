@@ -1,9 +1,9 @@
 // src/index.js
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import ReactDOM from 'react-dom';
+import App from './App.js'; // Added .js extension
 import { ReactKeycloakProvider } from '@react-keycloak/web';
-import keycloak from './keycloak';
+import keycloak from './keycloak.js'; // Added .js extension
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
