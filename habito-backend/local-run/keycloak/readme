@@ -1,0 +1,11 @@
+the docker-compose will host a keycloak server. It will import the realms found in the import folder.
+The realm also contains roles and users!
+If you want to update the realm that is imported, you can export your current realm and take it as a base.
+Recommendation is
+    1. make your change in Keycloak UI
+    2. export the realm
+    3. compare exported realm with the one in the import folder
+    4. update the realm in the import folder
+
+-- exports a specific realm to a file
+cd /opt/keycloak/bin/ && ./kc.sh export --file /tmp/exported-realm.json --realm < realm_name >
