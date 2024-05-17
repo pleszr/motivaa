@@ -1,0 +1,22 @@
+server:
+  port: 8093
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:mydb;NON_KEYWORDS=user
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db-changelog-master.yaml
+  sql:
+    init:
+      mode:
+
+logging:
+  level:
+    liquibase: trace
