@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @TestConfiguration
-public class TestSecurityConfig {
+public class SecurityConfigTest {
 
     @Bean
     @Primary

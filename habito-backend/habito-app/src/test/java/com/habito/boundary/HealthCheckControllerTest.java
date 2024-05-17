@@ -1,7 +1,7 @@
 package com.habito.boundary;
 
 import com.habito.config.SecurityConfig;
-import com.habito.config.TestSecurityConfig;
+import com.habito.config.SecurityConfigTest;
 import com.habito.control.HabitoService;
 import com.habito.entity.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-@Import({TestSecurityConfig.class, SecurityConfig.class})
+@Import({SecurityConfigTest.class, SecurityConfig.class})
 public class HealthCheckControllerTest {
 
     @Autowired
