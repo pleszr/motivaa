@@ -1,7 +1,6 @@
-// src/App.js
 import React from 'react';
-import withAuth from './auth/withAuth.js'; 
-import UserInfo from './components/userInfo.js'; 
+import withAuth from './auth/withAuth'; 
+import UserInfo from './components/userInfo'; 
 
 class App extends React.Component {
   state = {
@@ -61,4 +60,3 @@ class App extends React.Component {
 }
 
 export default withAuth(App);
-
