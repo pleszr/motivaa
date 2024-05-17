@@ -19,4 +19,4 @@ spring:
 
 logging:
   level:
-    liquibase: trace
+    liquibase: info
