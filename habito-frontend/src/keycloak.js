@@ -1,6 +1,7 @@
 // src/keycloak.js
 import Keycloak from 'keycloak-js';
 
+
 const keycloakConfig = {
   url: 'http://localhost:8080', // base url keycloak
   realm: 'habito', // realm name

@@ -1,71 +1,91 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { ReactKeycloakProvider, useKeycloak } from '@react-keycloak/web';
-import App from './App';
 import fetchMock from 'jest-fetch-mock';
+import App from './App';
 
-jest.mock('@react-keycloak/web', () => ({
-  ReactKeycloakProvider: jest.fn(({ children }) => <div>{children}</div>),
-  useKeycloak: jest.fn(),
-}));
-
+// Enable fetch mocking
 fetchMock.enableMocks();
 
-beforeEach(() => {
-  jest.clearAllMocks();
-  fetchMock.resetMocks();
-
-  useKeycloak.mockReturnValue({
-    keycloak: { token: 'test-token' },
-    initialized: true,
-  });
+jest.mock('./auth/withAuth', () => {
+    const React = require('react');
+    return (Component) => (props) =>
+        React.createElement(Component, {
+            ...props,
+            keycloak: { token: 'mock-token' },
+        });
 });
 
-test('renders loading state initially', () => {
-  render(
-    <ReactKeycloakProvider>
-      <App />
-    </ReactKeycloakProvider>
-  );
-  expect(screen.getByText('Loading health check...')).toBeInTheDocument();
-  expect(screen.getByText('Loading authenticated message...')).toBeInTheDocument();
+jest.mock('./components/userInfo', () => {
+    const React = require('react');
+    return () => React.createElement('div', null, 'UserInfo Component');
 });
 
-test('fetches and displays health check data', async () => {
-  fetchMock.mockResponses(
-    [JSON.stringify({ healthStatus: 'Healthy' }), { status: 200 }],
-    ['Authenticated message', { status: 200 }]
-  );
+describe('App', () => {
+    beforeEach(() => {
+        fetchMock.resetMocks();
+    });
 
-  render(
-    <ReactKeycloakProvider>
-      <App />
-    </ReactKeycloakProvider>
-  );
+    afterEach(() => {
+        jest.resetModules(); // Reset modules after each test to avoid conflicts
+    });
 
-  await waitFor(() => expect(screen.getByText('Health Check: Healthy')).toBeInTheDocument());
-  await waitFor(() => expect(screen.getByText('Authenticated Message: Authenticated message')).toBeInTheDocument());
+    it('should display loading messages initially', () => {
+        render(<App />);
+        expect(screen.getByText('Loading health check...')).toBeInTheDocument();
+        expect(screen.getByText('Loading authenticated message...')).toBeInTheDocument();
+    });
+
+    it('should display the API messages once fetched', async () => {
+        fetchMock.mockResponses(
+            [JSON.stringify({ healthStatus: 'ok', customMessage: 'cica' }), { status: 200 }],
+            ['Only authenticated users can see this.', { status: 200 }]
+        );
+
+        render(<App />);
+
+        expect(screen.getByText('Loading health check...')).toBeInTheDocument();
+        expect(screen.getByText('Loading authenticated message...')).toBeInTheDocument();
+
+        await waitFor(() => expect(screen.getByText('Health Check: ok')).toBeInTheDocument());
+        await waitFor(() =>
+            expect(screen.getByText('Authenticated Message: Only authenticated users can see this.')).toBeInTheDocument()
+        );
+    });
+
+    it('should display an error message if health check fails', async () => {
+        fetchMock.mockResponses(
+            [new Error('Failed to fetch health check'), { status: 500 }],
+            ['Only authenticated users can see this.', { status: 200 }]
+        );
+
+        render(<App />);
+
+        await waitFor(() =>
+            expect(screen.getByText((content, element) => {
+                return element.tagName.toLowerCase() === 'p' && content.includes('Failed to fetch health check data.');
+            })).toBeInTheDocument()
+        );
+    });
+
+    it('should display an error message if fetching authenticated message fails', async () => {
+        fetchMock.mockResponses(
+            [JSON.stringify({ healthStatus: 'ok', customMessage: 'cica' }), { status: 200 }],
+            [new Error('Failed to fetch authenticated message'), { status: 500 }]
+        );
+
+        render(<App />);
+
+        await waitFor(() => expect(screen.getByText('Health Check: ok')).toBeInTheDocument());
+        await waitFor(() =>
+            expect(screen.getByText((content, element) => {
+                return element.tagName.toLowerCase() === 'p' && content.includes('Failed to fetch authenticated message.');
+            })).toBeInTheDocument()
+        );
+    });
+
+    it('should render UserInfo component', () => {
+        render(<App />);
+        expect(screen.getByText('UserInfo Component')).toBeInTheDocument();
+    });
 });
-
-test('handles fetch errors gracefully', async () => {
-  fetchMock.mockResponses(
-    () => Promise.reject(new Error('Failed to fetch health check data')),
-    () => Promise.reject(new Error('Failed to fetch authenticated message'))
-  );
-
-  render(
-    <ReactKeycloakProvider>
-      <App />
-    </ReactKeycloakProvider>
-  );
-
-  await waitFor(() => expect(screen.getByText('Failed to fetch health check data.')).toBeInTheDocument());
-  await waitFor(() => expect(screen.getByText('Failed to fetch authenticated message.')).toBeInTheDocument());
-});
-
-
-
-
-
-
 
