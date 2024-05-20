@@ -15,5 +15,3 @@ function withAuth(WrappedComponent) {
 }
 
 export default withAuth;
-
-

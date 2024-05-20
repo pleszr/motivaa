@@ -22,4 +22,4 @@ jobs:
     - name: run backend unit tests with maven
       run: |
         cd habito-backend/
-        mvn test
+        mvn clean test

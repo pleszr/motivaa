@@ -1,34 +1,25 @@
 {
-  "name": "frontend",
+  "name": "habito-frontend",
   "version": "0.1.0",
   "private": true,
-  "type": "commonjs",
-  "proxy": "http://localhost:8093",
   "dependencies": {
+    "@react-keycloak/core": "^3.2.0",
     "@react-keycloak/web": "^3.4.0",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "body-parser": "^1.20.2",
-    "bootstrap": "5.1",
-    "express": "^4.19.2",
-    "express-jwt": "^8.4.1",
-    "express-session": "^1.18.0",
-    "jsonwebtoken": "^9.0.2",
-    "keycloak-connect": "^24.0.3",
-    "keycloak-js": "^24.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2",
+    "dotenv": "^16.4.5",
+    "keycloak-js": "^24.0.4",
     "react": "^18.3.1",
-    "react-cookie": "^4.1.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "^3.0.1",
-    "reactstrap": "^8.10.0",
-    "web-vitals": "^2.1.4"
+    "react-scripts": "5.0.1",
+    "svgo": "^2.8.0",
+    "web-vitals": "^4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -50,7 +41,11 @@
     ]
   },
   "devDependencies": {
-    "json-server": "^0.17.4",
-    "json-server-auth": "^2.1.0"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@testing-library/jest-dom": "^6.4.5",
+    "customize-cra": "^1.0.0",
+    "jest-fetch-mock": "^3.0.3",
+    "react-app-rewired": "^2.2.1",
+    "webpack-dev-server": "^5.0.4"
   }
 }

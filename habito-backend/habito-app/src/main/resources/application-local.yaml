@@ -1,5 +1,6 @@
 server:
   port: 8093
+
 spring:
   liquibase:
     change-log: classpath:db/changelog/db-changelog-master.yaml
@@ -8,6 +9,22 @@ spring:
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/habito
+        registration:
+          keycloak:
+            client-id: login
+            client-secret: your-client-secret
+            scope: openid,profile,email
+            redirect-uri: http://localhost:3000/login/oauth2/code/keycloak
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/habito
+
 logging:
   level:
-    liquibase: trace
+    liquibase: info
