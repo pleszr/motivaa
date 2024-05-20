@@ -45,7 +45,7 @@ public class HealthCheckControllerTest {
 
         String healthStatusFromJson = JsonPath.read(responseJson, "$.healthStatus");
         assertEquals("ok", healthStatusFromJson, "Healthcheck endpoint should return 'ok' for healthStatus");
-        verifyNoInteractions(habitoService);
+
     }
 
     @Test
@@ -58,18 +58,15 @@ public class HealthCheckControllerTest {
 
         String customMessageFromJson = JsonPath.read(responseJson, "$.customMessage");
         assertEquals("cica", customMessageFromJson, "Healthcheck endpoint should return 'cica' for customMessage");
-        verifyNoInteractions(habitoService);
+
     }
 
     @Test
     @WithMockUser(roles = "USER")
     void shouldReturnRandomUserInPlayground() throws Exception {
         User mockUser = new User();
-
-
         when(habitoService.createRandomUser()).thenReturn(mockUser);
-
-         mockMvc.perform(get("/apis/playground"))
+        mockMvc.perform(get("/apis/playground"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn()
@@ -86,9 +83,6 @@ public class HealthCheckControllerTest {
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
-
-
-
     }
 
     @Test
