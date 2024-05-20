@@ -29,12 +29,13 @@ describe('App', () => {
         jest.resetModules(); // Reset modules after each test to avoid conflicts
     });
 
+    // First-test to check if the App component renders
     it('should display loading messages initially', () => {
         render(<App />);
         expect(screen.getByText('Loading health check...')).toBeInTheDocument();
         expect(screen.getByText('Loading authenticated message...')).toBeInTheDocument();
     });
-
+    // Second-test check if the API messages are displayed
     it('should display the API messages once fetched', async () => {
         fetchMock.mockResponses(
             [JSON.stringify({ healthStatus: 'ok', customMessage: 'cica' }), { status: 200 }],
@@ -51,7 +52,7 @@ describe('App', () => {
             expect(screen.getByText('Authenticated Message: Only authenticated users can see this.')).toBeInTheDocument()
         );
     });
-
+    // Third-test to check if the error message is displayed if the health check fails
     it('should display an error message if health check fails', async () => {
         fetchMock.mockResponses(
             [new Error('Failed to fetch health check'), { status: 500 }],
@@ -66,7 +67,7 @@ describe('App', () => {
             })).toBeInTheDocument()
         );
     });
-
+    // Fourth-test to check if the error message is displayed if the authenticated message fails
     it('should display an error message if fetching authenticated message fails', async () => {
         fetchMock.mockResponses(
             [JSON.stringify({ healthStatus: 'ok', customMessage: 'cica' }), { status: 200 }],
@@ -82,7 +83,7 @@ describe('App', () => {
             })).toBeInTheDocument()
         );
     });
-
+    // Fifth-test to check if the UserInfo component is rendered
     it('should render UserInfo component', () => {
         render(<App />);
         expect(screen.getByText('UserInfo Component')).toBeInTheDocument();

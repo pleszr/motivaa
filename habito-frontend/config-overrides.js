@@ -1,3 +1,5 @@
+// This file is used to override the default webpack configuration of create-react-app
+
 module.exports = {
 
     webpack: function(config, env) {
