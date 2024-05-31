@@ -21,7 +21,7 @@ jobs:
         cache: maven
     - name: run backend unit tests with maven
       run: |
-        cd habito-backend/
+        cd motivaa-backend/
         mvn test
   deploy_to_docker_repo:
     needs: run_unit_tests
@@ -36,6 +36,6 @@ jobs:
           image: rplesz/motivaa-backend
           tags: v1, latest
           registry: docker.io
-          dockerfile: ./habito-backend/Dockerfile
+          dockerfile: ./motivaa-backend/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}

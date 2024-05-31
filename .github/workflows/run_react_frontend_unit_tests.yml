@@ -20,10 +20,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd habito-frontend/
+        cd motivaa-frontend/
         npm install
 
     - name: Run frontend tests
       run: |
-        cd habito-frontend/
+        cd motivaa-frontend/
         npm test
