@@ -14,8 +14,8 @@ const secretKey = 'eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI2NWQ3OWZlM
 // Middleware to protect routes with Keycloak JWT
 const checkJwt = expressJwt.expressjwt(({
     secret: secretKey,
-    audience: 'http://localhost:8080/realms/habito',
-    issuer: `http://localhost:8080/realms/habito`,
+    audience: 'http://localhost:8080/realms/motivaa',
+    issuer: `http://localhost:8080/realms/motivaa`,
     algorithms: ['HS512']
 }));
 
