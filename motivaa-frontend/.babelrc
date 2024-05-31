@@ -1,8 +1,3 @@
-// This file is used to configure Babel. 
-// Babel is a tool that converts ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments. 
-//It can also convert JSX syntax into JavaScript. 
-
-
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
