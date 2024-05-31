@@ -1,32 +1,24 @@
-// This file is used to override the default webpack configuration of create-react-app
-
 module.exports = {
-
-    webpack: function(config, env) {
-      return config;
-    },
-   
-    devServer: function(configFunction) {
-      return function(proxy, allowedHost) {
-        
-        const config = configFunction(proxy, allowedHost);
-  
-       
-        if (config.onBeforeSetupMiddleware) {
-          delete config.onBeforeSetupMiddleware;
-        }
-        if (config.onAfterSetupMiddleware) {
-          delete config.onAfterSetupMiddleware;
-        }
-        
-        
-        config.setupMiddlewares = (middlewares, devServer) => {
-         
-          return middlewares;
-        };
-  
+    webpack: function(config) {
+        config.module.rules.push({
+            test: /\.js$/,
+            enforce: 'pre',
+            use: [
+                {
+                    loader: 'source-map-loader',
+                    options: {
+                        filterSourceMappingUrl: (url, resourcePath) => {
+                            // Suppress warnings for the specified packages
+                            return !resourcePath.includes('@react-keycloak/core') &&
+                                !resourcePath.includes('@react-keycloak/web');
+                        }
+                    }
+                }
+            ]
+        });
         return config;
-      };
     }
-  };
+};
+
+
   

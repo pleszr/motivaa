@@ -46,6 +46,7 @@
     "customize-cra": "^1.0.0",
     "jest-fetch-mock": "^3.0.3",
     "react-app-rewired": "^2.2.1",
+    "source-map-loader": "^5.0.0",
     "webpack-dev-server": "^5.0.4"
   }
 }
