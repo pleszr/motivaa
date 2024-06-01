@@ -17,20 +17,19 @@ services:
     depends_on:
       - mysql
       - motivaa-keycloak
+    environment:
+        - DATABASE_URL=jdbc:mysql://mysql:3306/Motivaa
+        - DATABASE_USER=root
+        - DATABASE_PASSWORD=root
 
   mysql:
     image: mysql:latest
-    build:
-      context: ./motivaa-backend/local-run/mysql
-      dockerfile: Dockerfile
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: motivaa
-      MOTIVAA_ADMIN_PASSWORD: your_motivaa_admin_password
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: Motivaa
     ports:
       - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
+
 
   motivaa-keycloak:
     image: quay.io/keycloak/keycloak:24.0.3
