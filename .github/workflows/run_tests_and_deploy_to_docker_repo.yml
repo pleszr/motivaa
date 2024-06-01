@@ -36,6 +36,6 @@ jobs:
           image: rplesz/motivaa-backend
           tags: v1, latest
           registry: docker.io
-          dockerfile: ./motivaa-backend/Dockerfile
+          dockerfile: ./motivaa-backend/local-run/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
