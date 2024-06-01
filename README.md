@@ -30,21 +30,21 @@ To start with the dependencies, <b>to run MySQL and Keycloak</b>, execute the fo
 1. Open <b>powershell</b> and execute the following.
 
 ```c#
-powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 --docker-up-mysql-keycloak
+powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 -Action --docker-up-mysql-keycloak
 ```
 
 2. To run <b>motivaa-frontend</b>
 
 ```c#
-powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 --docker-up-frontend
+powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 -Action --docker-up-frontend
 ```
 
 3. To run <b>motivaa-backend</b>
 ```c#
-powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 --docker-up-backend
+powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 -Action --docker-up-backend
 ```
 
 4. To <b>stop it</b>
 ```c#
-powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 --docker-down
+powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 -Action --docker-down
 ```
