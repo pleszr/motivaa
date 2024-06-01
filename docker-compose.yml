@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./motivaa-frontend/
+      dockerfile: ./local-run/Dockerfile
+    ports:
+      - "3000:3000"
+
+  backend:
+    build:
+      context: ./motivaa-backend/
+      dockerfile: ./local-run/Dockerfile
+    ports:
+      - "8093:8093"
+    depends_on:
+      - mysql
+      - motivaa-keycloak
+
+  mysql:
+    image: mysql:latest
+    build:
+      context: ./motivaa-backend/local-run/mysql
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: motivaa
+      MOTIVAA_ADMIN_PASSWORD: your_motivaa_admin_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  motivaa-keycloak:
+    image: quay.io/keycloak/keycloak:24.0.3
+    container_name: motivaa-keycloak
+    volumes:
+      - ./import:/opt/keycloak/data/import
+    command: ["start-dev", "--import-realm", "--verbose"]
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: hadmin
+      REALM_NAME: Motivaa
+
+
+volumes:
+  mysql-data:
+
