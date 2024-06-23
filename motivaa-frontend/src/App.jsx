@@ -1,6 +1,6 @@
 import React from 'react';
-import withAuth from './auth/withAuth'; 
-import UserInfo from './components/userInfo'; 
+import withAuth from './auth/withAuth.jsx'; 
+import UserInfo from './components/userInfo.jsx'; 
 
 class App extends React.Component {
   state = {
@@ -44,6 +44,8 @@ class App extends React.Component {
       this.setState({ error: 'Failed to fetch authenticated message.' });
     }
   };
+
+
 
   render() {
     const { client, message, error } = this.state;
