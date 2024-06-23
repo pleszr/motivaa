@@ -1,6 +1,7 @@
 import React from 'react';
 import withAuth from './auth/withAuth.jsx'; 
 import UserInfo from './components/userInfo.jsx'; 
+import './index.css';
 
 class App extends React.Component {
   state = {
