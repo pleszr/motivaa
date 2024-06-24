@@ -2,7 +2,7 @@ import WeekdayCheckbox from "./WeekdayCheckbox";
 
 export default function WeekdayCheckboxList() {
   return (
-    <ul className="flex justify-between items-center">
+    <ul className="flex justify-between items-center gap-4">
       <li>
         <WeekdayCheckbox weekday={"M"} />
       </li>
