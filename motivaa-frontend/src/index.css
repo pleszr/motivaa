@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  min-height: 100vh;
+  font-family: Montserrat, sans-serif;
+  color: #545454;
+  font-weight: 500;
+  background: linear-gradient(138.2deg, rgba(255, 255, 255, 0.15) 15.11%, rgba(86, 227, 159, 0.15) 35.12%, rgba(218, 134, 115, 0.15) 47.59%, rgba(249, 112, 104, 0.15) 55.78%, rgba(242, 154, 94, 0.15) 66.63%, rgba(237, 180, 88, 0.15) 75.17%, rgba(214, 172, 100, 0.15) 83.12%, rgba(39, 111, 191, 0.15) 99.7%), #FFFFFF;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+progress {
+  border-radius: 50px;
+  height: 1.5rem;
+}
+progress::-webkit-progress-bar {
+  border-radius: 50px;
+  background-color: white;
+  box-shadow: 0px 0px 10px #9747FF;
+  
+}
+progress::-webkit-progress-value {
+  border-radius: 50px;
+  background-color: #9747FF;
+
+}
+progress::-moz-progress-bar {
+  border-radius: 50px;
+
+}
