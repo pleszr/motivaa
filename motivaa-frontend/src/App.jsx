@@ -3,17 +3,22 @@ import UserInfo from './components/userInfo.jsx';
 import Header from './components/Header.jsx';
 import ProgressBar from './components/ProgressBar.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
+import NewHabit from './components/Habits/NewHabit.jsx';
 import { useState } from 'react';
 import './index.css';
 
 export default function App() {
   const [activeMenu, setActiveMenu] = useState("home");
+  // for now, changing the comp depending on the activeMenu state, will need router later
   return (
-    <main className="flex flex-col gap-12"> 
-      <Header active={activeMenu} setActive={setActiveMenu} />
-      <ProgressBar />
-      <Dashboard />
-    </main>
+    <>
+      <main className="flex flex-col gap-12 mb-20"> 
+        <Header active={activeMenu} setActive={setActiveMenu} />
+        <ProgressBar />
+        {activeMenu === "home" && <Dashboard />}
+        {activeMenu === "habits" && <NewHabit />}
+      </main>
+    </>
   )
 }
 

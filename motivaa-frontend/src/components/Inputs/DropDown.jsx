@@ -9,7 +9,7 @@ export default function DropDown() {
         <input
           type="text"
           value="1"
-          readonly
+          readOnly={true}
           className="h-16 min-w-[300px] p-2 px-4 pl-6 bg-white border-2 border-purple cursor-pointer rounded-2xl outline-none group-hover:border-t-4 group-hover:border-s-4 group-hover:border-e-4 group-hover:border-b-0 group-hover:rounded-t-2xl group-hover:rounded-b-none transition-all duration-200"
           name="weekly-days"
           id="weekly-days"

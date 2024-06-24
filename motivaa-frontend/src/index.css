@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --purple-color: "#9747FF";
+  --green-color: "#56E39F";
+  --dark-color: "#545454";
+}
+
 body {
   min-height: 100vh;
   font-family: Montserrat, sans-serif;
@@ -30,4 +36,92 @@ progress::-webkit-progress-value {
 progress::-moz-progress-bar {
   border-radius: 50px;
 
+}
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50px;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 0px 0px 10px #9747FF;
+  position: relative;
+  z-index: 10;
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50px;
+  background: #ffffff;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 10px #9747FF;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1.5rem;
+  cursor: pointer;
+  background: linear-gradient(to right, rgba(151, 71, 255, 0.2) 11.25%, #9747FF 100%);
+  border-radius: 50px;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 1.5rem;
+  background: linear-gradient(to right, rgba(151, 71, 255, 0.2) 11.25%, #9747FF 100%);
+  border-radius: 50px;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 1.5rem;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #9747FF;
+  border-radius: 50px;
+}
+input[type=range]::-ms-fill-upper {
+  background: #9747FF;
+  border-radius: 50px;
 }
