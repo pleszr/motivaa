@@ -1,5 +1,5 @@
-// import WeeklyHabitAny from "../Habits/WeeklyHabitAny";
-// import WeeklyHabitFixed from "../Habits/WeeklyHabitFixed";
+import WeeklyHabitAny from "../Habits/WeeklyHabitAny";
+import WeeklyHabitFixed from "../Habits/WeeklyHabitFixed";
 
 export default function DashboardHabits() {
     return (
@@ -9,8 +9,8 @@ export default function DashboardHabits() {
                 <h2 className="text-2xl uppercase font-bold">Welcome username!</h2>
                 <h4 className="text-xl uppercase [word-spacing:3px]">Week 26 June 24-30</h4>
             </div>
-            {/* <WeeklyHabitFixed habitTitle="Walk the dog"/>
-            <WeeklyHabitAny habitTitle="Take out the trash"/> */}
+            <WeeklyHabitFixed habitTitle="Walk the dog"/>
+            <WeeklyHabitAny habitTitle="Take out the trash"/>
         </section>
     )
 }
