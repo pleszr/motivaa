@@ -1,14 +1,18 @@
 import withAuth from './auth/withAuth.jsx'; 
 import UserInfo from './components/userInfo.jsx'; 
 import Header from './components/Header.jsx';
+import ProgressBar from './components/ProgressBar.jsx';
+import Dashboard from './components/Dashboard/Dashboard.jsx';
 import { useState } from 'react';
 import './index.css';
 
 export default function App() {
   const [activeMenu, setActiveMenu] = useState("home");
   return (
-    <main> 
+    <main className="flex flex-col gap-12"> 
       <Header active={activeMenu} setActive={setActiveMenu} />
+      <ProgressBar />
+      <Dashboard />
     </main>
   )
 }
