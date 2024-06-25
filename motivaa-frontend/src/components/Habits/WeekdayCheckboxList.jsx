@@ -1,8 +1,8 @@
 import WeekdayCheckbox from "./WeekdayCheckbox";
 
-export default function WeekdayCheckboxList() {
+export default function WeekdayCheckboxList({ isReadonly }) {
   return (
-    <ul className="flex justify-between items-center gap-4">
+    <ul className={`${isReadonly ? 'opacity-50 pointer-events-none' : ''} flex justify-between items-center gap-4`}>
       <li>
         <WeekdayCheckbox weekday={"M"} />
       </li>
