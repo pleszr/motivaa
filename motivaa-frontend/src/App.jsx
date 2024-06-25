@@ -4,11 +4,14 @@ import Header from './components/Header.jsx';
 import ProgressBar from './components/ProgressBar.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import NewHabit from './components/Habits/NewHabit.jsx';
+import Habits from './components/Habits/Habits.jsx';
 import { useState } from 'react';
 import './index.css';
 
 export default function App() {
   const [activeMenu, setActiveMenu] = useState("home");
+  const [selectedHabit, setSelectedHabit] = useState(0);
+  const [isReadonly, setIsReadonly] = useState(true);
   // for now, changing the comp depending on the activeMenu state, will need router later
   return (
     <>
@@ -16,7 +19,12 @@ export default function App() {
         <Header active={activeMenu} setActive={setActiveMenu} />
         <ProgressBar />
         {activeMenu === "home" && <Dashboard />}
-        {activeMenu === "habits" && <NewHabit />}
+        {activeMenu === "habits" && (
+          <>
+            <Habits selectedHabit={selectedHabit} setSelectedHabit={setSelectedHabit} edit={isReadonly} setEdit={setIsReadonly} />
+            <NewHabit />
+          </>
+        )}
       </main>
     </>
   )
