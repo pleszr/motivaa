@@ -5,6 +5,7 @@ import ProgressBar from './components/ProgressBar.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import NewHabit from './components/Habits/NewHabit.jsx';
 import Habits from './components/Habits/Habits.jsx';
+import Calendar from './components/Calendar/Calendar.jsx';
 import { useState } from 'react';
 import './index.css';
 
@@ -15,19 +16,29 @@ export default function App() {
   // for now, changing the comp depending on the activeMenu state, will need router later
   return (
     <>
-      <main className="flex flex-col gap-12 mb-20"> 
+      <main className="flex flex-col gap-12 mb-20">
         <Header active={activeMenu} setActive={setActiveMenu} />
-        <ProgressBar />
-        {activeMenu === "home" && <Dashboard />}
+        {activeMenu === "home" && (
+          <>
+            <ProgressBar />
+            <Dashboard />
+          </>
+        )}
         {activeMenu === "habits" && (
           <>
-            <Habits selectedHabit={selectedHabit} setSelectedHabit={setSelectedHabit} edit={isReadonly} setEdit={setIsReadonly} />
+            <Habits
+              selectedHabit={selectedHabit}
+              setSelectedHabit={setSelectedHabit}
+              edit={isReadonly}
+              setEdit={setIsReadonly}
+            />
             <NewHabit />
           </>
         )}
+        {activeMenu === "calendar" && <Calendar />}
       </main>
     </>
-  )
+  );
 }
 
 
