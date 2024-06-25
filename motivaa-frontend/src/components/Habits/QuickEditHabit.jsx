@@ -16,7 +16,7 @@ export default function QuickEditHabit({ selectedHabit, tempHabits, edit, setEdi
                 <form className="w-full flex flex-col justify-top items-center gap-12">
                     <h4 contentEditable={!edit} className="uppercase text-xl font-bold border-b-2 border-transparent outline-none hover:border-b-2 hover:border-purple">{tempHabits[selectedHabit]}</h4>
                     <div className="w-full flex flex-col gap-8 justify-top items-center">
-                        <div className="w-full flex justify-between items-end">
+                        <div className="w-full flex flex-col justify-between items-start gap-8">
                             <ButtonInputWrapper>
                                 <CheckboxButton isReadonly={edit} text="Specific Day" />
                                 <CheckboxButton isReadonly={edit} text="Non-Specific Day" />
