@@ -1,11 +1,15 @@
-export default function DropDown() {
-    // custom select input -> need some state to handle open/close events to open options dropdown
+export default function DropDown({ isReadonly }) {
+  // custom dropdown input -> need some state to handle open/close events to open the dropdownlist
   return (
     <div className="flex flex-col gap-4">
       <label className="uppercase pl-6" htmlFor="weekly-days">
         Times / Week
       </label>
-      <div className="relative group">
+      <div
+        className={`${
+          isReadonly ? "opacity-50 pointer-events-none" : ""
+        } relative group`}
+      >
         <input
           type="text"
           value="1"
