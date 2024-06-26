@@ -8,6 +8,7 @@ import Habits from './components/Habits/Habits.jsx';
 import Calendar from './components/Calendar/Calendar.jsx';
 import { useState } from 'react';
 import './index.css';
+import WeekOverview from './components/Calendar/WeekOverview.jsx';
 
 export default function App() {
   const [activeMenu, setActiveMenu] = useState("home");
@@ -35,7 +36,8 @@ export default function App() {
             <NewHabit />
           </>
         )}
-        {activeMenu === "calendar" && <Calendar />}
+        {activeMenu === "calendar" && <Calendar setActive={setActiveMenu} />}
+        {activeMenu === "week-overview" && <WeekOverview setActive={setActiveMenu}/>}
       </main>
     </>
   );
