@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard.jsx';
 import NewHabit from './components/Habits/NewHabit.jsx';
 import Habits from './components/Habits/Habits.jsx';
 import Calendar from './components/Calendar/Calendar.jsx';
+import Overview from './components/Overview/Overview.jsx';
 import { useState } from 'react';
 import './index.css';
 import WeekOverview from './components/Calendar/WeekOverview.jsx';
@@ -38,6 +39,7 @@ export default function App() {
         )}
         {activeMenu === "calendar" && <Calendar setActive={setActiveMenu} />}
         {activeMenu === "week-overview" && <WeekOverview setActive={setActiveMenu}/>}
+        {activeMenu === "overview" && <Overview />}
       </main>
     </>
   );
