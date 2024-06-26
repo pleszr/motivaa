@@ -2,7 +2,6 @@ package com.motivaa.boundary;
 
 import com.motivaa.config.SecurityConfig;
 import com.motivaa.config.SecurityConfigTest;
-import com.motivaa.control.MotivaaService;
 import com.motivaa.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

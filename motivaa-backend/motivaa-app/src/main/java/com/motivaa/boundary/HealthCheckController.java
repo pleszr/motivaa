@@ -1,6 +1,5 @@
 package com.motivaa.boundary;
 
-import com.motivaa.control.MotivaaService;
 import com.motivaa.entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +17,6 @@ import java.util.Map;
 @RequestMapping("/apis")
 @Log4j2
 public class HealthCheckController {
-    private final MotivaaService motivaaService;
-
-    HealthCheckController(MotivaaService motivaaService) {
-        this.motivaaService = motivaaService;
-    }
-
     @GetMapping("/healthcheck")
     public ResponseEntity<Map<String, String>> healthChecker(){
         log.trace("healthcheck successful");
@@ -34,9 +27,8 @@ public class HealthCheckController {
     }
 
     @GetMapping("/playground")
-    public ResponseEntity<User> playground(){
-        User user = motivaaService.createRandomUser();
-        return ResponseEntity.ok(user);
+    public ResponseEntity<String> playground(){
+        return ResponseEntity.ok("ok");
     }
 
     @GetMapping("/authTest")
