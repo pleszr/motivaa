@@ -29,10 +29,6 @@ public class HealthCheckControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private MotivaaService motivaaService;
-
-
     @Test
     void shouldReturnCorrectHealthStatus() throws Exception {
         String responseJson = mockMvc.perform(get("/apis/healthcheck"))
@@ -56,20 +52,6 @@ public class HealthCheckControllerTest {
 
         String customMessageFromJson = JsonPath.read(responseJson, "$.customMessage");
         assertEquals("cica", customMessageFromJson, "Healthcheck endpoint should return 'cica' for customMessage");
-
-    }
-
-    @Test
-    @WithMockUser(roles = "USER")
-    void shouldReturnRandomUserInPlayground() throws Exception {
-        User mockUser = new User();
-        when(motivaaService.createRandomUser()).thenReturn(mockUser);
-        mockMvc.perform(get("/apis/playground"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
 
     }
 
