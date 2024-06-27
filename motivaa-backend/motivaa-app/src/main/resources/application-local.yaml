@@ -5,18 +5,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-  security:
-    oauth2:
-      client:
-        provider:
-          keycloak:
-            issuer-uri: http://localhost:8080/realms/Motivaa
-        registration:
-          keycloak:
-            client-id: login
-            client-secret: your-client-secret
-            scope: openid,profile,email
-            redirect-uri: http://localhost:3000/login/oauth2/code/keycloak
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8080/realms/Motivaa
