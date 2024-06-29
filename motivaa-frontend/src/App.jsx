@@ -6,8 +6,11 @@ import Dashboard from './components/Dashboard/Dashboard.jsx';
 import NewHabit from './components/Habits/NewHabit.jsx';
 import Habits from './components/Habits/Habits.jsx';
 import Calendar from './components/Calendar/Calendar.jsx';
+import Overview from './components/Overview/Overview.jsx';
+import Profile from './components/Profile/Profile.jsx';
 import { useState } from 'react';
 import './index.css';
+import WeekOverview from './components/Calendar/WeekOverview.jsx';
 
 export default function App() {
   const [activeMenu, setActiveMenu] = useState("home");
@@ -35,7 +38,14 @@ export default function App() {
             <NewHabit />
           </>
         )}
-        {activeMenu === "calendar" && <Calendar />}
+        {activeMenu === "calendar" && <Calendar setActive={setActiveMenu} />}
+        {activeMenu === "week-overview" && (
+          <WeekOverview setActive={setActiveMenu} />
+        )}
+        {activeMenu === "overview" && <Overview />}
+        {activeMenu === "profile" && (
+          <Profile edit={isReadonly} setEdit={setIsReadonly} />
+        )}
       </main>
     </>
   );

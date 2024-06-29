@@ -14,7 +14,8 @@ export default {
         'green': "#56E39F",
         'dark': "#545454",
         'hover-purple': "#C599FF",
-        'gray': "#ECECEC"
+        'gray': "#ECECEC",
+        'red': "#FF6363"
       },
       boxShadow: {
         'motivaa-shadow': "0px 100px 80px rgba(0, 0, 0, 0.0209047), 0px 30.1471px 24.1177px rgba(0, 0, 0, 0.03), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.0390953), 0px 4.5288px 3.62304px rgba(0, 0, 0, 0.06)"

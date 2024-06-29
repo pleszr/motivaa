@@ -1,6 +1,6 @@
 import CalendarWeek from "./CalendarWeek";
 
-export default function Calendar() {
+export default function Calendar({ setActive }) {
     // need a month picker
     // logic for changing months and updating the weeks (numbers and periods) accordingly
     return (
@@ -14,16 +14,16 @@ export default function Calendar() {
             </div>
             <ul className="w-4/5 mx-auto flex flex-col gap-8">
                 <li>
-                    <CalendarWeek score="50"/>
+                    <CalendarWeek setActive={setActive} score="50"/>
                 </li>
                 <li>
-                    <CalendarWeek score="20"/>
+                    <CalendarWeek setActive={setActive} score="20"/>
                 </li>
                 <li>
-                    <CalendarWeek score="100"/>
+                    <CalendarWeek setActive={setActive} score="100"/>
                 </li>
                 <li>
-                    <CalendarWeek score="75"/>
+                    <CalendarWeek setActive={setActive} score="75"/>
                 </li>
             </ul>
         </section>
