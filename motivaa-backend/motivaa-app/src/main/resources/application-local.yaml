@@ -2,29 +2,13 @@ server:
   port: 8093
 
 spring:
-  liquibase:
-    change-log: classpath:db/changelog/db-changelog-master.yaml
-  datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  security:
-    oauth2:
-      client:
-        provider:
-          keycloak:
-            issuer-uri: http://localhost:8080/realms/Motivaa
-        registration:
-          keycloak:
-            client-id: login
-            client-secret: your-client-secret
-            scope: openid,profile,email
-            redirect-uri: http://localhost:3000/login/oauth2/code/keycloak
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8080/realms/Motivaa
+  jpa:
+    hibernate:
+      ddl-auto: none
 
-logging:
-  level:
-    liquibase: info
+elasticsearch:
+  host: http://localhost:9200
+
+monitoring:
+  esHealthCheckInterval: 60000
+
