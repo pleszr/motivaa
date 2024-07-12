@@ -1,13 +1,11 @@
 package com.motivaa.boundary;
 
-import com.motivaa.control.MotivaaService;
-import com.motivaa.entity.User;
+import com.motivaa.control.UserFinder;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*")
@@ -15,13 +13,11 @@ import java.util.Map;
 @RequestMapping("/apis")
 @Log4j2
 public class HealthCheckController {
-    MotivaaService motivaaService;
+    UserFinder userFinder;
 
-    HealthCheckController(MotivaaService motivaaService){
-        this.motivaaService = motivaaService;
+    HealthCheckController(UserFinder userFinder){
+        this.userFinder = userFinder;
     }
-
-
     @GetMapping("/healthcheck")
     public ResponseEntity<Map<String, String>> healthChecker(){
         log.trace("healthcheck successful");
@@ -30,18 +26,4 @@ public class HealthCheckController {
         response.put("customMessage", "cica");
         return ResponseEntity.ok(response);
     }
-
-    @PostMapping("/createRandomUser")
-    public ResponseEntity<User> playground(){
-        User user = motivaaService.createRandomUser();
-        return ResponseEntity.ok(user);
-    }
-
-    @GetMapping("/searchUserByFirstName")
-    public ResponseEntity<List<User>> searchUserByFirstName(@RequestParam("firstName") String firstName) throws java.io.IOException{
-        List<User> users = motivaaService.searchUserByFirstName(firstName);
-        return ResponseEntity.ok(users);
-    }
-
-
 }

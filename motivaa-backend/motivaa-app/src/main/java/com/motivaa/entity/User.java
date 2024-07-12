@@ -1,20 +1,35 @@
 package com.motivaa.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
-@Entity
+
 @Data
+@NoArgsConstructor
 public class User {
+    public User(
+            String email,
+            String firstName,
+            String lastName
+    ) {
+        this.uuid = UUID.randomUUID();
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = "active";
+        this.createdTimestamp = new Timestamp(System.currentTimeMillis());
+    }
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    String uuid;
-    String username;
+    UUID uuid;
     String email;
     String firstName;
     String lastName;
     String status;
-    Timestamp lastLoginTimeStamp;
+    Timestamp createdTimestamp;
+    Timestamp lastLoginTimestamp;
 }

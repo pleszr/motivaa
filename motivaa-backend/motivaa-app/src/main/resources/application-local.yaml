@@ -5,3 +5,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+elasticsearch:
+  host: http://localhost:9200
+
+monitoring:
+  esHealthCheckInterval: 60000
+

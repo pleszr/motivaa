@@ -51,6 +51,11 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.4.0.905</version>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -60,6 +65,14 @@
       <version>6.2.4</version>
       <scope>test</scope>
       <exclusions>
+        <exclusion>
+          <artifactId>spring-security-core</artifactId>
+          <groupId>org.springframework.security</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-security-web</artifactId>
+          <groupId>org.springframework.security</groupId>
+        </exclusion>
         <exclusion>
           <artifactId>spring-test</artifactId>
           <groupId>org.springframework</groupId>
@@ -83,6 +96,10 @@
         <exclusion>
           <artifactId>json-path</artifactId>
           <groupId>com.jayway.jsonpath</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>json-smart</artifactId>
+          <groupId>net.minidev</groupId>
         </exclusion>
         <exclusion>
           <artifactId>assertj-core</artifactId>
