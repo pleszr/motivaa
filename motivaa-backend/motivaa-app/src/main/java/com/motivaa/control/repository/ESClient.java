@@ -39,7 +39,7 @@ public class ESClient {
         }
 
         public void saveUser(User user) throws java.io.IOException{
-                IndexResponse response = esClient.index(i -> i
+                esClient.index(i -> i
                         .index("user")
                         .id(user.getUuid().toString())
                         .document(user));
@@ -60,7 +60,7 @@ public class ESClient {
         }
 
         public void saveHabit(Habit habit) throws java.io.IOException{
-                IndexResponse response = esClient.index(i -> i
+                esClient.index(i -> i
                         .index("habit")
                         .id(habit.getUuid().toString())
                         .document(habit));
