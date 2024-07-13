@@ -48,3 +48,8 @@ powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 -Action --docker-up-bac
 ```c#
 powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 -Action --docker-down
 ```
+# Backend documentation
+Application prints the Swagger URI to the console. See example: 
+```log
+2024-07-13T23:59:32.891+02:00  INFO 73517 --- [           main] c.m.c.m.PrintSwaggerUriPostStartup       : Swagger UI: http://localhost:8093/swagger-ui.html
+```
