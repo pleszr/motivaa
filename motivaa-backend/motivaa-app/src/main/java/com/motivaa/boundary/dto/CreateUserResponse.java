@@ -1,7 +1,6 @@
 package com.motivaa.boundary.dto;
 
 import com.motivaa.entity.User;
-import lombok.Data;
 import lombok.Value;
 
 import java.sql.Timestamp;
