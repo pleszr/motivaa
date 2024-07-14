@@ -2,10 +2,12 @@ package com.motivaa.boundary.dto;
 
 import com.motivaa.entity.User;
 import lombok.Data;
+import lombok.Value;
+
 import java.sql.Timestamp;
 import java.util.UUID;
 
-@Data
+@Value
 public class CreateUserResponse {
     UUID uuid;
     String email;
