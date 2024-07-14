@@ -45,20 +45,20 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
-    @ExceptionHandler(Exception.class)
-    ProblemDetail handleGenericException(Exception exception) {
-        exceptionId = UUID.randomUUID().toString();
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR,"Internal server error" );
-        problemDetail.setProperty("exceptionId", exceptionId);
-
-        log.error(
-                "exceptionId: {}",
-                exceptionId,
-                exception
-        );
-
-        return problemDetail;
-    }
+//    @ExceptionHandler(Exception.class)
+//    ProblemDetail handleGenericException(Exception exception) {
+//        exceptionId = UUID.randomUUID().toString();
+//        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR,"Internal server error" );
+//        problemDetail.setProperty("exceptionId", exceptionId);
+//
+//        log.error(
+//                "exceptionId: {}",
+//                exceptionId,
+//                exception
+//        );
+//
+//        return problemDetail;
+//    }
 
 
 
