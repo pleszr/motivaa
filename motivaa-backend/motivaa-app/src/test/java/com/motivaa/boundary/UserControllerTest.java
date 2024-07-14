@@ -192,11 +192,9 @@ public class UserControllerTest {
                     .thenReturn(
                             List.of()
                     );
-            String responseJson = mockMvc.perform(MockMvcRequestBuilders.get("/user-apis/users")
+            mockMvc.perform(MockMvcRequestBuilders.get("/user-apis/users")
                     .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk())
-                    .andReturn().getResponse().getContentAsString();
-            assertEquals("[]", responseJson,"Expected empty json, but got " + responseJson);
+                    .andExpect(status().isNoContent());
         }
 
         @Test

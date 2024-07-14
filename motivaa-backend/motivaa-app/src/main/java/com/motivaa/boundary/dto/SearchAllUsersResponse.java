@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 @Value
-public class CreateUserResponse {
+public class SearchAllUsersResponse {
     UUID uuid;
     String email;
     String firstName;
@@ -16,7 +16,7 @@ public class CreateUserResponse {
     Timestamp createdTimestamp;
     Timestamp lastLoginTimestamp;
 
-    private CreateUserResponse(User user) {
+    private SearchAllUsersResponse(User user) {
         this.uuid = user.getUuid();
         this.email = user.getEmail();
         this.firstName = user.getFirstName();
@@ -26,7 +26,7 @@ public class CreateUserResponse {
         this.lastLoginTimestamp = user.getLastLoginTimestamp();
     }
 
-    public static CreateUserResponse fromUser (User user) {
-        return new CreateUserResponse(user);
+    public static SearchAllUsersResponse fromUser (User user) {
+        return new SearchAllUsersResponse(user);
     }
 }

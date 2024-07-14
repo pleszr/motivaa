@@ -3,7 +3,6 @@ package com.motivaa.boundary.dto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-
 @Data
 public class CreateUserRequest {
     @NotBlank(message = "Email is mandatory")

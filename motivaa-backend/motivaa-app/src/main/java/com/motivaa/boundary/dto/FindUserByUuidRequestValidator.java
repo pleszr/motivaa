@@ -1,19 +1,17 @@
 package com.motivaa.boundary.dto;
 
 import com.motivaa.control.errorHandling.MotivaaException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import com.motivaa.control.errorHandling.ErrorCode;
+import lombok.Value;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.UUID;
 
 @Log4j2
-@AllArgsConstructor
-@Data
+@Value
 public class FindUserByUuidRequestValidator {
 
-    private String userUuid;
+    String userUuid;
 
     public static void validateRequest(String userUuid) {
         validateLength(userUuid);
