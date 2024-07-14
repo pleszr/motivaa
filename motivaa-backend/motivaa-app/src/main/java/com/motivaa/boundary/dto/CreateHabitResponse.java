@@ -1,10 +1,11 @@
 package com.motivaa.boundary.dto;
 
 import com.motivaa.entity.Habit;
-import lombok.Data;
+import lombok.Value;
+
 import java.util.UUID;
 
-@Data
+@Value
 public class CreateHabitResponse {
     UUID uuid;
     String userUuid;
