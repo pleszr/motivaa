@@ -1,8 +1,10 @@
 package com.motivaa;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 import com.motivaa.boundary.UserFromJson;
 import com.motivaa.entity.User;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -49,5 +51,16 @@ public class TestUtils {
         String validFirstName = "Unit2";
         String validLastName = "Test2";
         return new User(validEmail, validFirstName, validLastName);
+    }
+
+    public static void assertMissingField(String responseJson, String fieldName, String expectedMessage) {
+        String missingEmailFromJson = JsonPath.parse(responseJson)
+                .read("$.errors[?(@.key == '" + fieldName + "')].value")
+                .toString()
+                .replace("[\"", "")
+                .replace("\"]", "");
+        assertEquals(
+                expectedMessage,
+                missingEmailFromJson);
     }
 }

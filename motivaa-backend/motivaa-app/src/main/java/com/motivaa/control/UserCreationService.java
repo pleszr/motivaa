@@ -1,7 +1,6 @@
 package com.motivaa.control;
 
-import com.motivaa.control.errorHandling.ErrorCode;
-import com.motivaa.control.errorHandling.MotivaaException;
+import com.motivaa.control.errorHandling.exceptions.RepositoryException;
 import com.motivaa.control.repository.MotivaaRepository;
 import com.motivaa.entity.User;
 import lombok.extern.log4j.Log4j2;
@@ -23,7 +22,7 @@ public class UserCreationService {
         try {
             motivaaRepository.saveUser(user);
         } catch (IOException e) {
-            throw new MotivaaException(ErrorCode.INTERNAL_SERVER_ERROR,"Error while saving user to the database");
+            throw new RepositoryException("Some error happened. Please try again later.");
         }
         return user;
     }

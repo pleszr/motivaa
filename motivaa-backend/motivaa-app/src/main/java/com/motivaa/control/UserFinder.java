@@ -1,7 +1,7 @@
 package com.motivaa.control;
 
-import com.motivaa.control.errorHandling.ErrorCode;
-import com.motivaa.control.errorHandling.MotivaaException;
+import com.motivaa.control.errorHandling.exceptions.RepositoryException;
+import com.motivaa.control.errorHandling.exceptions.NotFoundException;
 import com.motivaa.control.repository.MotivaaRepository;
 import com.motivaa.entity.User;
 import lombok.extern.log4j.Log4j2;
@@ -23,8 +23,7 @@ public class UserFinder {
         try {
             userList = motivaaRepository.searchAllUsers();
         } catch (IOException e) {
-            log.error("IOException at searchAllUsers",e);
-            throw new MotivaaException(ErrorCode.INTERNAL_SERVER_ERROR,"Error while retrieving all users");
+            throw new RepositoryException("Some error happened. Please try again later.");
         }
         return userList;
     }
@@ -35,13 +34,11 @@ public class UserFinder {
             user = motivaaRepository.findUserByUuid(uuid);
         } catch (IOException e) {
             log.error("IOException at findUserByUuid",e);
-            throw new MotivaaException(ErrorCode.INTERNAL_SERVER_ERROR, String.format("Error while searching user by uuid: %s", uuid));
+            throw new RepositoryException("Some error happened. Please try again later.");
         }
         if (user == null) {
-            throw new MotivaaException(ErrorCode.NOT_FOUND, String.format("User with uuid: %s, not found", uuid));
+            throw new NotFoundException(String.format("User with uuid: %s, not found", uuid));
         }
         return user;
     }
-
-    //findUserByUuid
 }

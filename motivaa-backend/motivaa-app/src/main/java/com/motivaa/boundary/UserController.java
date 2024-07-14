@@ -46,19 +46,7 @@ public class UserController {
                     content = {
                             @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = CreateUserResponse.class))
-                    }),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "Invalid user data",
-                    content = @Content),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "User not found",
-                    content = @Content),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Internal server error",
-                    content = @Content)
+                    })
     })
     @PostMapping("/users")
     public ResponseEntity<CreateUserResponse> createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
@@ -84,11 +72,7 @@ public class UserController {
                     responseCode = "204",
                     description = "Returned 0 users successfully",
                     content = @Content(mediaType = "application/json")
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Internal server error",
-                    content = @Content)
+            )
     })
     @GetMapping("/users")
     public ResponseEntity<List<SearchAllUsersResponse>> searchAllUsers() {
@@ -110,16 +94,8 @@ public class UserController {
                                     schema = @Schema(implementation = FindUserByUuidResponse.class))
                     }),
             @ApiResponse(
-                    responseCode = "400",
-                    description = "Invalid user UUID",
-                    content = @Content),
-            @ApiResponse(
                     responseCode = "404",
                     description = "User not found",
-                    content = @Content),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Internal server error",
                     content = @Content)
     })
     @GetMapping("/users/{userUuid}")

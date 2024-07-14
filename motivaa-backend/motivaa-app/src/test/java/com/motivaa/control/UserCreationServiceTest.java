@@ -1,6 +1,6 @@
 package com.motivaa.control;
 
-import com.motivaa.control.errorHandling.MotivaaException;
+import com.motivaa.control.errorHandling.exceptions.RepositoryException;
 import com.motivaa.control.repository.MotivaaRepository;
 import com.motivaa.entity.User;
 import org.junit.jupiter.api.Test;
@@ -45,16 +45,14 @@ public class UserCreationServiceTest {
                 when(motivaaRepository).
                 saveUser(any(User.class));
 
-        MotivaaException motivaaException = assertThrows(
-                MotivaaException.class,
+        RepositoryException repositoryException = assertThrows(
+                RepositoryException.class,
                 () -> userCreationService.createUser(validEmail, validFirstName, validLastName),
-                "Expected createUser to throw MotivaaException, but it didn't"
+                "Expected createUser to throw RepositoryException, but it didn't"
         );
 
-        String errorCode = motivaaException.getErrorCode();
-        String errorMessage = motivaaException.getMessage();
-        assertEquals("INTERNAL_SERVER_ERROR", errorCode, "Expected error code to be INTERNAL_SERVER_ERROR");
-        assertEquals("Error while saving user to the database", errorMessage, "Expected error message to be 'Error while saving user to the database'");
+        String errorMessage = repositoryException.getMessage();
+        assertEquals("Some error happened. Please try again later.", errorMessage);
     }
 
     @Test

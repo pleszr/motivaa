@@ -1,7 +1,8 @@
 package com.motivaa.boundary.dto;
 
-import com.motivaa.control.errorHandling.MotivaaException;
-import com.motivaa.control.errorHandling.ErrorCode;
+
+import com.motivaa.control.errorHandling.exceptions.FieldCustomValidationException;
+import lombok.AllArgsConstructor;
 import lombok.Value;
 import lombok.extern.log4j.Log4j2;
 
@@ -20,7 +21,7 @@ public class FindUserByUuidRequestValidator {
 
     private static void validateLength(String userUuid) {
         if (userUuid.length() != 36) {
-            throw new MotivaaException(ErrorCode.BAD_REQUEST, "Invalid UUID length");
+            throw new FieldCustomValidationException("Invalid UUID length");
         }
     }
 
@@ -28,7 +29,8 @@ public class FindUserByUuidRequestValidator {
         try {
             UUID.fromString(userUuid);
         } catch (IllegalArgumentException e) {
-            throw new MotivaaException(ErrorCode.BAD_REQUEST, "Invalid UUID");
+            throw new FieldCustomValidationException("Invalid UUID format");
+
         }
     }
 

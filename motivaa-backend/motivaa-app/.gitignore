@@ -23,6 +23,9 @@ target/
 *.iml
 *.ipr
 
+### Maven ###
+dependency-reduced-pom.xml
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
