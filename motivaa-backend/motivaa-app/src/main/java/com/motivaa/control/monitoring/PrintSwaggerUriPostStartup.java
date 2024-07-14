@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrintSwaggerUriPostStartup {
     @Value("${server.port}")
-    int port;
+    private int port;
 
     @PostConstruct
     public void printSwaggerUri() {
