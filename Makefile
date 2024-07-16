@@ -1,6 +1,6 @@
-docker-up-mysql-keycloak:
+docker-up-es-keycloak:
 	@echo "Starting docker and keycloak..."
-	@docker-compose -f docker-compose.yml up -d mysql motivaa-keycloak
+	@docker-compose -f docker-compose.yml up -d elasticsearch motivaa-keycloak
 	@echo "Waiting for dependencies to start..."
 	@sleep 60
 docker-up-frontend:

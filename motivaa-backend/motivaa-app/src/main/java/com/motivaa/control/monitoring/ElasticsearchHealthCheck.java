@@ -1,18 +1,28 @@
 package com.motivaa.control.monitoring;
 
 import com.jayway.jsonpath.JsonPath;
+import com.motivaa.config.ElasticsearchProperties;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+
 import java.net.SocketTimeoutException;
 
 @Log4j2
 @Component
 public class ElasticsearchHealthCheck {
-    String esStatus;
+
+    private String esStatus;
+    private final ElasticsearchProperties elasticsearchProperties;
+
+    @Autowired
+    public ElasticsearchHealthCheck(ElasticsearchProperties elasticsearchProperties) {
+        this.elasticsearchProperties = elasticsearchProperties;
+    }
 
     public void checkElasticsearchHealth() {
         try {
@@ -20,7 +30,7 @@ public class ElasticsearchHealthCheck {
         } catch (ResourceAccessException e) {
             esStatus = "error";
             if (isTimeoutException(e)) {
-                log.error("Elastic Search down. Timeout exception occurred.");
+                log.error("Elasticsearch down. Timeout exception occurred.");
             } else {
                 log.error("Failed to check Elasticsearch health: {}", e.getMessage());
             }
@@ -33,7 +43,7 @@ public class ElasticsearchHealthCheck {
         requestFactory.setConnectTimeout(5000);
         requestFactory.setReadTimeout(5000);
         RestTemplate restTemplate = new RestTemplate(requestFactory);
-        String healthCheckUrl = "http://localhost:9200/_cluster/health";
+        String healthCheckUrl = elasticsearchProperties.getHost() + "/_cluster/health";
         ResponseEntity<String> esResponse = restTemplate.getForEntity(healthCheckUrl, String.class);
         esStatus = JsonPath.read(esResponse.getBody(), "$.status");
     }
@@ -43,11 +53,9 @@ public class ElasticsearchHealthCheck {
     }
 
     private void logEsStatus(String esStatus) {
-        if (esStatus.equals("green") || esStatus.equals("yellow")) {
+        if ("green".equals(esStatus) || "yellow".equals(esStatus)) {
             log.info("Elasticsearch healthcheck ok, health status: {}", esStatus);
-            return;
-        }
-        if (esStatus.equals("red")) {
+        } else if ("red".equals(esStatus)) {
             log.error("Elasticsearch connection failed, health status: {}", esStatus);
         }
     }

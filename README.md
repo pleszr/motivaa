@@ -4,10 +4,10 @@
 
 If you haven't installed it, please install 'make'
 
-1. To start with the dependencies, <b>to run MySQL and Keycloak</b>, execute the following: (make sure Docker Compose is installed)
+1. To start with the dependencies, <b>to run ElasticSearch and Keycloak</b>, execute the following: (make sure Docker Compose is installed)
 
 ```c#
-make docker-up-mysql-keycloak
+make docker-up-ES-keycloak
 ```
 2. To run <b>motivaa-frontend</b>
 ```c#
