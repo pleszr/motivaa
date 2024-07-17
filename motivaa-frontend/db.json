@@ -1,0 +1,124 @@
+{
+  "users": [
+    {
+      "uuid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "email": "john.doe@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "status": "active",
+      "createdTimestamp": "2023-01-01T00:00:00Z",
+      "lastLoginTimestamp": "2023-07-01T00:00:00Z"
+    },
+    {
+      "uuid": "41a85f64-5717-4562-b3fc-2c963f66afa6",
+      "email": "micheal.doe@example.com",
+      "firstName": "Micheal",
+      "lastName": "Doe",
+      "status": "active",
+      "createdTimestamp": "2023-01-01T00:00:00Z",
+      "lastLoginTimestamp": "2023-07-01T00:00:00Z"
+    },
+    {
+      "status": "active",
+      "createdTimestamp": "2024-07-16T23:59:21.041Z",
+      "lastLoginTimestamp": "2024-07-16T23:59:21.050Z"
+    },
+    {
+      "status": "active",
+      "createdTimestamp": "2024-07-17T00:01:55.226Z",
+      "lastLoginTimestamp": "2024-07-17T00:01:55.226Z"
+    },
+    {
+      "email": "john.doe@example.com",
+      "firstName": "John5",
+      "lastName": "Doe5",
+      "status": "active",
+      "createdTimestamp": "2024-07-17T00:04:45.578Z",
+      "lastLoginTimestamp": "2024-07-17T00:04:45.590Z"
+    },
+    {
+      "email": "john.doe@example.com",
+      "firstName": "John5",
+      "lastName": "Doe5",
+      "status": "active",
+      "createdTimestamp": "2024-07-17T00:05:06.652Z",
+      "lastLoginTimestamp": "2024-07-17T00:05:06.652Z"
+    },
+    {
+      "email": "john.doe6@example.com",
+      "firstName": "John6",
+      "lastName": "Doe6",
+      "status": "active",
+      "createdTimestamp": "2024-07-17T00:05:38.227Z",
+      "lastLoginTimestamp": "2024-07-17T00:05:38.235Z"
+    },
+    {
+      "email": "john.doe6@example.com",
+      "firstName": "John6",
+      "lastName": "Doe6",
+      "uuid": "c8e5780e-286d-4a2a-87c7-aca970fd3af9",
+      "status": "active",
+      "createdTimestamp": "2024-07-17T00:09:35.553Z",
+      "lastLoginTimestamp": "2024-07-17T00:09:35.553Z"
+    },
+    {
+      "email": "john.doe6@example.com",
+      "firstName": "John6",
+      "lastName": "Doe6",
+      "uuid": "bd10d300-c32a-46e7-ab90-ed8c4523db35",
+      "status": "active",
+      "createdTimestamp": "2024-07-17T00:11:26.945Z",
+      "lastLoginTimestamp": "2024-07-17T00:11:26.945Z"
+    },
+    {
+      "uuid": "8bf438ff-465f-4882-94bb-259126dfacd3",
+      "email": "john.doe6@example.com",
+      "firstName": "John6",
+      "lastName": "Doe6",
+      "status": "active",
+      "createdTimestamp": "2024-07-17T00:12:03.964Z",
+      "lastLoginTimestamp": "2024-07-17T00:12:03.972Z"
+    },
+    {
+      "uuid": "18eae465-e8d7-47aa-a2e8-45d64bd08ef1",
+      "email": "john.doe6@example.com",
+      "firstName": "John6",
+      "lastName": "Doe6",
+      "status": "active",
+      "createdTimestamp": "2024-07-17T00:32:27.410Z",
+      "lastLoginTimestamp": "2024-07-17T00:32:27.423Z"
+    }
+  ],
+  "habits": [
+    {
+      "uuid": "d1b9ddda-2c0e-449d-9152-bcd1c042a8ea",
+      "userUuid": "string",
+      "name": "string",
+      "recurringType": "string",
+      "recurringDetails": "string",
+      "priority": 0,
+      "color": "string",
+      "createdTimestamp": "2024-07-17T00:30:03.649Z"
+    },
+    {
+      "uuid": "1de111a9-a2b2-4d96-91b6-062e62973c6f",
+      "userUuid": "1",
+      "name": "2",
+      "recurringType": "3",
+      "recurringDetails": "4",
+      "priority": 0,
+      "color": "5",
+      "createdTimestamp": "2024-07-17T00:31:51.310Z"
+    },
+    {
+      "uuid": "bc7b90e4-b160-431e-9497-72562dbfe465",
+      "userUuid": "1",
+      "name": "2",
+      "recurringType": "3",
+      "recurringDetails": "4",
+      "priority": 0,
+      "color": "5",
+      "createdTimestamp": "2024-07-17T00:41:11.791Z"
+    }
+  ]
+}
