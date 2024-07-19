@@ -1,9 +1,8 @@
 package com.motivaa.control.monitoring;
 
 import com.jayway.jsonpath.JsonPath;
-import com.motivaa.config.ElasticsearchProperties;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
@@ -17,12 +16,9 @@ import java.net.SocketTimeoutException;
 public class ElasticsearchHealthCheck {
 
     private String esStatus;
-    private final ElasticsearchProperties elasticsearchProperties;
 
-    @Autowired
-    public ElasticsearchHealthCheck(ElasticsearchProperties elasticsearchProperties) {
-        this.elasticsearchProperties = elasticsearchProperties;
-    }
+    @Value("${elasticsearch.host}")
+    String ELASTICSEARCH_HOST;
 
     public void checkElasticsearchHealth() {
         try {
@@ -43,7 +39,7 @@ public class ElasticsearchHealthCheck {
         requestFactory.setConnectTimeout(5000);
         requestFactory.setReadTimeout(5000);
         RestTemplate restTemplate = new RestTemplate(requestFactory);
-        String healthCheckUrl = elasticsearchProperties.getHost() + "/_cluster/health";
+        String healthCheckUrl = ELASTICSEARCH_HOST + "/_cluster/health";
         ResponseEntity<String> esResponse = restTemplate.getForEntity(healthCheckUrl, String.class);
         esStatus = JsonPath.read(esResponse.getBody(), "$.status");
     }

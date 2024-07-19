@@ -1,6 +1,7 @@
 package com.motivaa.boundary;
 
 import com.motivaa.boundary.dto.*;
+import com.motivaa.boundary.validators.FindUserByUuidRequestValidator;
 import com.motivaa.control.UserCreationService;
 import com.motivaa.control.UserFinder;
 import com.motivaa.entity.User;

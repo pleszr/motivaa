@@ -20,7 +20,7 @@ public class CreateHabitResponse {
         this.userUuid = habit.getUserUuid();
         this.name = habit.getName();
         this.recurringType = habit.getRecurringType();
-        this.recurringDetails = habit.getRecurringDetails();
+        this.recurringDetails = habit.getRecurringTypeDetails();
         this.priority = habit.getPriority();
         this.color = habit.getColor();
     }

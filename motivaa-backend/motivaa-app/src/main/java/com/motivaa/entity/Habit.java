@@ -10,21 +10,21 @@ public class Habit {
     String userUuid;
     String name;
     String recurringType;
-    String recurringDetails;
+    String recurringTypeDetails;
     Integer priority;
     String color;
 
     public Habit(String userUuid,
                  String name,
                  String recurringType,
-                 String recurringDetails,
+                 String recurringTypeDetails,
                  Integer priority,
                  String color) {
         this.uuid = UUID.randomUUID();
         this.userUuid = userUuid;
         this.name = name;
         this.recurringType = recurringType;
-        this.recurringDetails = recurringDetails;
+        this.recurringTypeDetails = recurringTypeDetails;
         this.priority = priority;
         this.color = color;
     }

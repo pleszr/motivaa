@@ -86,7 +86,7 @@ public class ControllerExceptionHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 exceptionUuid,
                 createNewErrorList(ERROR_MESSAGE_KEY, "Some error occurred on server, please try later."));
-        log.error("GlobalException: {}",ex.getMessage());
+        log.error("GlobalException: ",ex);
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
