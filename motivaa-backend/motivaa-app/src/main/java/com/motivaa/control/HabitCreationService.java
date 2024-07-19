@@ -3,11 +3,14 @@ package com.motivaa.control;
 import com.motivaa.control.errorHandling.exceptions.RepositoryException;
 import com.motivaa.control.repository.MotivaaRepository;
 import com.motivaa.control.utility.MessageBundle;
+import com.motivaa.entity.DaySpecificHabit;
 import com.motivaa.entity.Habit;
+import com.motivaa.entity.NotDaySpecificHabit;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Service
 @Log4j2
@@ -20,18 +23,29 @@ public class HabitCreationService {
     public Habit createHabit(String userUuid,
                             String name,
                             String recurringType,
-                            String recurringTypeDetails,
+                            String listOfRecurringDays,
+                            Integer numberOfOccasionsInWeek,
                             Integer priority,
                             String color) {
         HabitUtils.validateIfUserExists(userUuid, motivaaRepository);
-        HabitUtils.validateRecurringFieldsForType(recurringType, recurringTypeDetails);
-        Habit habit = new Habit(
-                userUuid,
-                name,
-                recurringType,
-                recurringTypeDetails,
-                priority,
-                color);
+        HabitUtils.validateRecurringFieldsForType(recurringType, listOfRecurringDays,numberOfOccasionsInWeek);
+        Habit habit = switch (recurringType) {
+            case "specific_day" -> new DaySpecificHabit(
+                    userUuid,
+                    name,
+                    recurringType,
+                    Arrays.asList(listOfRecurringDays.split(";")),
+                    priority,
+                    color);
+            case "non_specific_day" -> new NotDaySpecificHabit(
+                    userUuid,
+                    name,
+                    recurringType,
+                    numberOfOccasionsInWeek,
+                    priority,
+                    color);
+            default -> throw new IllegalArgumentException("Invalid recurringType");
+        };
         try {
             motivaaRepository.saveHabit(habit);
         } catch (IOException e) {
@@ -39,4 +53,7 @@ public class HabitCreationService {
         }
         return habit;
     }
+
+//    private Habit createSpecificHabit
+
 }

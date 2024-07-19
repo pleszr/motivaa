@@ -50,7 +50,15 @@ public class CreateHabitRequest {
             description = "Recurring days of the habit. Expects a list of days separated by semi-colon (;). Mandatory if recurring type is specific_day",
             example = "monday",
             implementation = PossibleDays.class)
-    String recurringTypeDetails;
+    String listOfRecurringDays;
+
+    @Min(value = 1, message = "Number of occasions in a week must be between 1 and 7")
+    @Max(value = 7, message = "Number of occasions in a week must be between 1 and 7")
+    @Schema(
+            description = "Number of occasions in a week. Mandatory if recurring type is non_specific_day",
+            minimum = "1",
+            maximum = "7")
+    Integer numberOfOccasionsInWeek;
 
     @Min(value = 1, message = "Priority must be between 1 and 5")
     @Max(value = 5, message = "Priority must be between 1 and 5")

@@ -1,5 +1,6 @@
 package com.motivaa.control;
 
+import com.motivaa.control.errorHandling.exceptions.FieldCustomValidationException;
 import com.motivaa.control.errorHandling.exceptions.NotFoundException;
 import com.motivaa.control.errorHandling.exceptions.RepositoryException;
 import com.motivaa.control.repository.MotivaaRepository;
@@ -25,14 +26,33 @@ public class HabitUtils {
 
     public static void validateRecurringFieldsForType(
             String recurringType,
-            String recurringTypeDetails) {
+            String listOfRecurringDays,
+            Integer numberOfOccasionsInWeek) {
         switch (recurringType) {
             case "specific_day":
-                //validateSpecificDay(listOfRecurringDays, numberOfOccasionsInWeek);
+                validateSpecificDay(listOfRecurringDays, numberOfOccasionsInWeek);
                 break;
             case "non_specific_day":
-                //validateNonSpecificDay(listOfRecurringDays, numberOfOccasionsInWeek);
+                validateNonSpecificDay(listOfRecurringDays, numberOfOccasionsInWeek);
                 break;
         }
     }
+
+    private static void validateSpecificDay(String listOfRecurringDays, Integer numberOfOccasionsInWeek) {
+        if (listOfRecurringDays == null || listOfRecurringDays.isEmpty()) {
+            throw new FieldCustomValidationException("listOfRecurringDays is mandatory for specific_day type");
+        }
+        if (numberOfOccasionsInWeek != null) {
+            throw new FieldCustomValidationException("numberOfOccasionsInWeek is not allowed for specific_day type");
+        }
+    }
+    private static void validateNonSpecificDay(String listOfRecurringDays, Integer numberOfOccasionsInWeek) {
+        if (listOfRecurringDays != null) {
+            throw new FieldCustomValidationException("listOfRecurringDays is not allowed for non_specific_day type");
+        }
+        if (numberOfOccasionsInWeek == null) {
+            throw new FieldCustomValidationException("numberOfOccasionsInWeek is mandatory for non_specific_day type");
+        }
+    }
+
 }

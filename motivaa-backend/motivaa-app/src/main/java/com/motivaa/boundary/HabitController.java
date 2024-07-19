@@ -43,12 +43,13 @@ public class HabitController {
     })
     @PostMapping("/habits")
     public ResponseEntity<CreateHabitResponse> createHabit(@Valid @RequestBody CreateHabitRequest createHabitRequest) {
-        log.trace("Habit creation for habit started with details: {}", createHabitRequest);
+        log.info("Habit creation for habit started with details: {}", createHabitRequest);
         Habit habit = habitCreationService.createHabit(
                         createHabitRequest.getUserUuid(),
                         createHabitRequest.getName(),
                         createHabitRequest.getRecurringType(),
-                        createHabitRequest.getRecurringTypeDetails(),
+                        createHabitRequest.getListOfRecurringDays(),
+                        createHabitRequest.getNumberOfOccasionsInWeek(),
                         createHabitRequest.getPriority(),
                         createHabitRequest.getColor());
         log.info("Habit creation for habit finished with details: {}", habit);
