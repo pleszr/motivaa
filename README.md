@@ -39,7 +39,7 @@ To start with the dependencies, <b>to run ElasticSearch and Keycloak</b>, execut
 1. Open <b>powershell</b> and execute the following.
 
 ```c#
-powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 -Action --docker-es-mysql-keycloak
+powershell -ExecutionPolicy ByPass -File .\runDocker.ps1 -Action --docker-up-es-keycloak
 ```
 
 2. To run <b>motivaa-backend</b>

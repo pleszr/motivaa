@@ -3,13 +3,13 @@ param (
 )
 
 if ($null -eq $Action) {
-    Write-Host "Invalid action specified. Please use one of the following options: --docker-up-es-keycloak, --docker-up-frontend, --docker-up-backend, --docker-down"
+    Write-Host "Invalid action specified. Please use one of the following options: -Action --docker-up-es-keycloak or -Action --docker-up-frontend or -Action --docker-up-backend or -Action --docker-down"
     exit 1
 }
 
 switch ($Action) {
     "--docker-up-es-keycloak" {
-        Write-Host "Starting Docker and Keycloak..."
+        Write-Host "Starting Docker, ES and Keycloak..."
         docker-compose -f docker-compose.yml up -d elasticsearch motivaa-keycloak
         Write-Host "Waiting for dependencies to start..."
         Start-Sleep -Seconds 60
@@ -33,7 +33,7 @@ switch ($Action) {
         docker-compose -f docker-compose.yml down
     }
     default {
-        Write-Host "Invalid action specified. Please use one of the following options: --docker-up-mysql-keycloak, --docker-up-frontend, --docker-up-backend, --docker-down"
+        Write-Host "Invalid action specified. Please use one of the following options, please include -Action as well!: -Action --docker-up-es-keycloak or -Action --docker-up-frontend or -Action --docker-up-backend or -Action --docker-down"
     }
 }
 

@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const PORT = 3001;
-const SWAGGER_URL = 'http://localhost:8093/v3/api-docs';
+const SWAGGER_URL = process.env.BACKEND_URL || 'http://localhost:8093/v3/api-docs'; // Use environment variable
 const DB_FILE = path.resolve(__dirname, 'db.json');
 
 function isValidRequestData(data, schema) {
