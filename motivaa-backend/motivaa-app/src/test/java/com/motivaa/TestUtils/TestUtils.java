@@ -1,8 +1,7 @@
-package com.motivaa;
+package com.motivaa.TestUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
-import com.motivaa.boundary.UserFromJson;
 import com.motivaa.entity.User;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

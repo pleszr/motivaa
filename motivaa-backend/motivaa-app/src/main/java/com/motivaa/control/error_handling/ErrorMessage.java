@@ -1,4 +1,4 @@
-package com.motivaa.control.errorHandling;
+package com.motivaa.control.error_handling;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

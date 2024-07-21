@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @NoArgsConstructor
 @Data
-abstract public class Habit {
+public abstract  class Habit {
     UUID uuid;
     String userUuid;
     String name;
@@ -14,7 +14,7 @@ abstract public class Habit {
     Integer priority;
     String color;
 
-    public Habit(String userUuid,
+    protected Habit(String userUuid,
                  String name,
                  String recurringType,
                  Integer priority,

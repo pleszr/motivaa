@@ -1,5 +1,10 @@
 package com.motivaa.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class NotDaySpecificHabit extends Habit {
     Integer numberOfOccasionsInWeek;
 
@@ -16,4 +21,6 @@ public class NotDaySpecificHabit extends Habit {
     public String getRecurringTypeDetails() {
         return numberOfOccasionsInWeek.toString();
     }
+
+
 }

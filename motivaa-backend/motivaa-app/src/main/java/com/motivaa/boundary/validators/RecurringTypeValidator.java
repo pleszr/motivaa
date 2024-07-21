@@ -9,6 +9,8 @@ public class RecurringTypeValidator implements ConstraintValidator<ValidRecurrin
 
     @Override
     public boolean isValid(String recurringType, ConstraintValidatorContext context) {
+        if(recurringType == null)
+            return true;
         return EnumUtils.isValidEnum(PossibleRecurringTypes.class, recurringType);
     }
 }

@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(HealthCheckController.class)
 @ActiveProfiles("test")
-public class HealthCheckControllerTest {
+class HealthCheckControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

@@ -1,12 +1,13 @@
 package com.motivaa.boundary;
 
 import com.jayway.jsonpath.JsonPath;
-import com.motivaa.TestUtils;
+import com.motivaa.TestUtils.TestUtils;
+import com.motivaa.TestUtils.UserFromJson;
 import com.motivaa.control.UserCreationService;
 import com.motivaa.control.UserFinder;
-import com.motivaa.control.errorHandling.exceptions.FieldCustomValidationException;
-import com.motivaa.control.errorHandling.exceptions.NotFoundException;
-import com.motivaa.control.errorHandling.exceptions.RepositoryException;
+import com.motivaa.control.error_handling.exceptions.FieldCustomValidationException;
+import com.motivaa.control.error_handling.exceptions.NotFoundException;
+import com.motivaa.control.error_handling.exceptions.RepositoryException;
 import com.motivaa.entity.User;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.motivaa.TestUtils.createValidUser1;
+import static com.motivaa.TestUtils.TestUtils.createValidUser1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

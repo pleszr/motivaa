@@ -1,7 +1,7 @@
 package com.motivaa.boundary.validators;
 
 
-import com.motivaa.control.errorHandling.exceptions.FieldCustomValidationException;
+import com.motivaa.control.error_handling.exceptions.FieldCustomValidationException;
 import lombok.Value;
 import lombok.extern.log4j.Log4j2;
 

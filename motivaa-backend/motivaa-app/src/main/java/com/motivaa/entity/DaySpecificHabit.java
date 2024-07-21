@@ -1,7 +1,12 @@
 package com.motivaa.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Getter
+@Setter
 public class DaySpecificHabit extends Habit {
     List<String> listOfRecurringDays;
 
