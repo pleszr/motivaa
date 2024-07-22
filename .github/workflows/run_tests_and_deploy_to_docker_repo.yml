@@ -22,7 +22,7 @@ jobs:
     - name: run backend unit tests with maven
       run: |
         cd motivaa-backend/
-        mvn test
+        mvn test -P test
   deploy_to_docker_repo:
     needs: run_unit_tests
     runs-on: ubuntu-latest
