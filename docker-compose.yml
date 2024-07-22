@@ -7,6 +7,10 @@ services:
       dockerfile: ./local-run/Dockerfile
     ports:
       - "3000:3000"
+      - "3001:3001"
+    environment:
+    - BACKEND_URL=http://backend:8093/v3/api-docs
+    
 
   backend:
     build:
@@ -18,7 +22,7 @@ services:
       - elasticsearch
       - motivaa-keycloak
     environment:
-        - ELASTICSEARCH_URL=http://elasticsearch:9200
+        - ELASTICSEARCH=http://elasticsearch:9200
 
 #  mysql:
 #    image: mysql:latest

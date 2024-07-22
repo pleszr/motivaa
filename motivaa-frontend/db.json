@@ -87,6 +87,15 @@
       "status": "active",
       "createdTimestamp": "2024-07-17T00:32:27.410Z",
       "lastLoginTimestamp": "2024-07-17T00:32:27.423Z"
+    },
+    {
+      "uuid": "4fb3246a-c3f5-4677-8456-661ed0034999",
+      "email": "sdfasdfasdfasdfasdf@example.com",
+      "firstName": "Jasdfasdfasdfasdfaohn",
+      "lastName": "Dadfasdfasoe",
+      "status": "active",
+      "createdTimestamp": "2024-07-19T08:23:00.593Z",
+      "lastLoginTimestamp": "2024-07-19T08:23:00.593Z"
     }
   ],
   "habits": [
