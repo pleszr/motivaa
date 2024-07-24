@@ -1,5 +1,6 @@
 import Button from "../Button";
-import diagram from "../../assets/test-diagram.png";
+import Image from "next/image";
+import diagram from "../../../public/test-diagram.png";
 
 export default function DashboardWeeklyScore() {
     return (
@@ -9,7 +10,7 @@ export default function DashboardWeeklyScore() {
                 <Button text="View More" style="absolute right-0" />
             </div>
             <div className="w-full px-12">
-                <img className="w-3/4 mx-auto" src={diagram} />
+                <Image className="w-3/4 mx-auto" src={diagram} alt="diagram"/>
             </div>
         </section>
     )

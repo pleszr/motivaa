@@ -5,7 +5,8 @@ import HabitColor from "../Inputs/HabitColor";
 import Priority from "../Inputs/Priority";
 import ButtonInputWrapper from "../Wrappers/ButtonInputWrapper";
 import WeekdayCheckboxList from "./WeekdayCheckboxList";
-import diagram from "../../assets/test-diagram.png";
+import Image from "next/image";
+import diagram from "../../../public/test-diagram.png";
 
 
 export default function QuickEditHabit({ selectedHabit, tempHabits, edit, setEdit }) {
@@ -33,7 +34,7 @@ export default function QuickEditHabit({ selectedHabit, tempHabits, edit, setEdi
                     </div>
                 </form>
                 <div>
-                    <img className="w-3/4 mx-auto" src={diagram} />
+                    <Image className="w-3/4 mx-auto" src={diagram} alt="diagram"/>
                 </div>
             </div>
             <div className="flex flex-col gap-4">
