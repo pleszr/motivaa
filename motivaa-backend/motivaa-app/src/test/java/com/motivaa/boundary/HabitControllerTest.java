@@ -149,7 +149,7 @@ public class HabitControllerTest {
 
                 performPostRequest(request)
                         .andExpect(status().isBadRequest())
-                        .andExpect(jsonPath("$.errors[?(@.key=='recurringType')].value").value(MessageBundle.MISSING_RECURRING_TYPE_ERROR_MESSAGE));
+                        .andExpect(jsonPath("$.errors[?(@.key=='recurringType')].value").value(MessageBundle.MISSING_OR_INVALID_RECURRING_TYPE_ERROR_MESSAGE));
             }
 
             @Test
@@ -161,9 +161,9 @@ public class HabitControllerTest {
                         .andExpect(status().isBadRequest())
                         .andExpect(jsonPath("$.errors[?(@.key=='userUuid')].value").value(MessageBundle.MISSING_UUID_ERROR_MESSAGE))
                         .andExpect(jsonPath("$.errors[?(@.key=='name')].value").value(MessageBundle.MISSING_NAME_ERROR_MESSAGE))
-                        .andExpect(jsonPath("$.errors[?(@.key=='recurringType')].value").value(MessageBundle.MISSING_RECURRING_TYPE_ERROR_MESSAGE))
+                        .andExpect(jsonPath("$.errors[?(@.key=='recurringType')].value").value(MessageBundle.MISSING_OR_INVALID_RECURRING_TYPE_ERROR_MESSAGE))
                         .andExpect(jsonPath("$.errors[?(@.key=='priority')].value").value(MessageBundle.MISSING_PRIORITY_ERROR_MESSAGE))
-                        .andExpect(jsonPath("$.errors[?(@.key=='color')].value").value(MessageBundle.MISSING_COLOR_ERROR_MESSAGE));
+                        .andExpect(jsonPath("$.errors[?(@.key=='color')].value").value(MessageBundle.MISSING_OR_INVALID_COLOR_RESPONSE));
             }
         }
         @Nested
@@ -211,7 +211,7 @@ public class HabitControllerTest {
 
                 performPostRequest(request)
                         .andExpect(status().isBadRequest())
-                        .andExpect(jsonPath("$.errors[?(@.key=='recurringType')].value").value(MessageBundle.INVALID_RECURRING_TYPE_ERROR_MESSAGE));
+                        .andExpect(jsonPath("$.errors[?(@.key=='recurringType')].value").value(MessageBundle.MISSING_OR_INVALID_RECURRING_TYPE_ERROR_MESSAGE));
             }
 
             @Test
@@ -338,7 +338,7 @@ public class HabitControllerTest {
 
                 performPostRequest(request)
                         .andExpect(status().isBadRequest())
-                        .andExpect(jsonPath("$.errors[?(@.key=='color')].value").value(MessageBundle.INVALID_COLOR_RESPONSE));
+                        .andExpect(jsonPath("$.errors[?(@.key=='color')].value").value(MessageBundle.MISSING_OR_INVALID_COLOR_RESPONSE));
             }
         }
     }

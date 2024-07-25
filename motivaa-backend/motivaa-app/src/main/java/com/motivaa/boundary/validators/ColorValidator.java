@@ -9,8 +9,6 @@ public class ColorValidator implements ConstraintValidator<ValidColor, String> {
 
     @Override
     public boolean isValid(String colorValue, ConstraintValidatorContext context) {
-        if(colorValue == null)
-            return true;
         return EnumUtils.isValidEnum(PossibleColors.class, colorValue);
     }
 }

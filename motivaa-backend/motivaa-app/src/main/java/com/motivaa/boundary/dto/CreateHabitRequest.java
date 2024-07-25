@@ -38,7 +38,6 @@ public class CreateHabitRequest {
             pattern = Constants.NAME_REGEX)
     String name;
 
-    @NotBlank(message = MessageBundle.MISSING_RECURRING_TYPE_ERROR_MESSAGE)
     @Schema(
             description = "Recurring type of the habit",
             example = "SPECIFIC_DAY",
@@ -72,11 +71,11 @@ public class CreateHabitRequest {
     Integer priority;
 
     @Schema (
+            requiredMode = Schema.RequiredMode.REQUIRED,
             description = "Color of the habit",
             example = "RED",
             implementation = PossibleColors.class)
     @ValidColor
-    @NotBlank(message = MessageBundle.MISSING_COLOR_ERROR_MESSAGE)
     String color;
 
 

@@ -7,12 +7,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 public abstract  class Habit {
-    UUID uuid;
-    String userUuid;
-    String name;
-    String recurringType;
-    Integer priority;
-    String color;
+    private UUID uuid;
+    private String userUuid;
+    private String name;
+    private String recurringType;
+    private Integer priority;
+    private String color;
 
     protected Habit(String userUuid,
                  String name,

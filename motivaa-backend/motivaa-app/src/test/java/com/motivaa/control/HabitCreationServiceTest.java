@@ -6,12 +6,16 @@ import com.motivaa.control.error_handling.exceptions.NotFoundException;
 import com.motivaa.control.error_handling.exceptions.RepositoryException;
 import com.motivaa.control.repository.MotivaaRepository;
 import com.motivaa.control.utility.MessageBundle;
-import static com.motivaa.control.utility.MessageBundle.INVALID_RECURRING_TYPE_ERROR_MESSAGE;
+import static com.motivaa.control.utility.MessageBundle.MISSING_OR_INVALID_RECURRING_TYPE_ERROR_MESSAGE;
 import com.motivaa.entity.DaySpecificHabit;
 import com.motivaa.entity.Habit;
 import com.motivaa.entity.NotDaySpecificHabit;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,6 +27,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Arrays;
+import java.util.Set;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -65,6 +70,11 @@ public class HabitCreationServiceTest {
                     null,
                     Integer.parseInt(HabitRequestCreator.VALID_PRIORITY),
                     HabitRequestCreator.VALID_COLOR);
+
+            Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+            Set<ConstraintViolation<Habit>> violations = validator.validate(habit);
+
+            assertTrue(violations.isEmpty());
 
             assertEquals(
                     DaySpecificHabit.class,
@@ -226,7 +236,7 @@ public class HabitCreationServiceTest {
                         HabitRequestCreator.VALID_COLOR
                 ));
 
-            assertEquals(INVALID_RECURRING_TYPE_ERROR_MESSAGE, exception.getMessage());
+            assertEquals(MISSING_OR_INVALID_RECURRING_TYPE_ERROR_MESSAGE, exception.getMessage());
         }
 
         @Test

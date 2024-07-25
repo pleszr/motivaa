@@ -15,7 +15,7 @@ import java.io.IOException;
 @Service
 @Log4j2
 public class CommonHabitServices {
-    MotivaaRepository motivaaRepository;
+    private final MotivaaRepository motivaaRepository;
 
     CommonHabitServices(MotivaaRepository motivaaRepository) {
         this.motivaaRepository = motivaaRepository;
@@ -25,7 +25,6 @@ public class CommonHabitServices {
         User user;
         try {
             user = motivaaRepository.findUserByUuid(userUuid);
-            log.info(MessageBundle.USER_NOT_FOUND);
         } catch (IOException e) {
             throw new RepositoryException(MessageBundle.INTERNAL_ERROR_RESPONSE);
         }
@@ -46,7 +45,7 @@ public class CommonHabitServices {
                 validateNonSpecificDay(listOfRecurringDays, numberOfOccasionsInWeek);
                 break;
             default:
-                throw new FieldCustomValidationException(MessageBundle.INVALID_RECURRING_TYPE_ERROR_MESSAGE);
+                throw new FieldCustomValidationException(MessageBundle.MISSING_OR_INVALID_RECURRING_TYPE_ERROR_MESSAGE);
         }
     }
 

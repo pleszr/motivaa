@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class NotDaySpecificHabit extends Habit {
-    Integer numberOfOccasionsInWeek;
+    private Integer numberOfOccasionsInWeek;
 
     public NotDaySpecificHabit(String userUuid,
                                String name,
