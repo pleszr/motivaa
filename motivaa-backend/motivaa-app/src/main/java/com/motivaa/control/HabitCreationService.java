@@ -51,7 +51,7 @@ public class HabitCreationService {
                     numberOfOccasionsInWeek,
                     priority,
                     color);
-            default -> throw new FieldCustomValidationException(MessageBundle.INVALID_RECURRING_TYPE_ERROR_MESSAGE);
+            default -> throw new FieldCustomValidationException(MessageBundle.MISSING_OR_INVALID_RECURRING_TYPE_ERROR_MESSAGE);
         };
         try {
             motivaaRepository.saveHabit(habit);

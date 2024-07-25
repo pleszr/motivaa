@@ -13,12 +13,12 @@ public class RecurringDaysValidator implements ConstraintValidator<ValidListOfRe
             return true;
         String[] recurringDaysList = recurringDays.split(";");
         for (String day : recurringDaysList) {
-            if (isInvalidEnum(day))
+            if (!isValidEnum(day))
                 return false;
             }
         return true;
     }
-    private boolean isInvalidEnum(String day) {
-        return !EnumUtils.isValidEnum(PossibleDays.class, day);
+    private boolean isValidEnum(String day) {
+        return EnumUtils.isValidEnum(PossibleDays.class, day);
     }
 }

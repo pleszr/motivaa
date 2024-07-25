@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidRecurringType {
-    String message() default MessageBundle.INVALID_RECURRING_TYPE_ERROR_MESSAGE;
+    String message() default MessageBundle.MISSING_OR_INVALID_RECURRING_TYPE_ERROR_MESSAGE;
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

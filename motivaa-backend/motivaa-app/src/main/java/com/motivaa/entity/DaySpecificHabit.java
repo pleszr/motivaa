@@ -8,7 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 public class DaySpecificHabit extends Habit {
-    List<String> listOfRecurringDays;
+    private List<String> listOfRecurringDays;
 
     public DaySpecificHabit(String userUuid,
                                String name,
