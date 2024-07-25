@@ -12,7 +12,7 @@ public class MessageBundle {
 
     public static final String MISSING_UUID_ERROR_MESSAGE = "User UUID is mandatory";
     public static final String MISSING_NAME_ERROR_MESSAGE = "Name is mandatory";
-    public static final String INVALID_UUID_FORMAT_ERROR_MESSAGE = "Invalid User UUID format";
+    public static final String INVALID_UUID_FORMAT_ERROR_MESSAGE = "Invalid UUID format";
     public static final String INVALID_NAME_FORMAT_ERROR_MESSAGE = "Invalid name format";
     public static final String INVALID_NUMBER_OF_OCCASIONS_IN_WEEK_ERROR_MESSAGE = "Number of occasions in a week must be between 1 and 7";
     public static final String INVALID_PRIORITY_ERROR_MESSAGE = "Priority must be between 1 and 5";

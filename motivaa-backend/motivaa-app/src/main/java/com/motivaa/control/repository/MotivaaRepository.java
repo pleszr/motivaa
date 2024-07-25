@@ -4,6 +4,7 @@ import com.motivaa.entity.Habit;
 import com.motivaa.entity.User;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -28,6 +29,10 @@ public class MotivaaRepository{
 
     public void saveHabit(Habit habit) throws java.io.IOException {
         esClient.saveHabit(habit);
+    }
+
+    public List<Habit> searchHabitByUserUuid(String userUuid) throws IOException {
+        return esClient.searchHabitByUserUuid(userUuid);
     }
 
 

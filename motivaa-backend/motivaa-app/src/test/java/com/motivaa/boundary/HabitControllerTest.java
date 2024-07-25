@@ -3,6 +3,7 @@ package com.motivaa.boundary;
 import com.motivaa.TestUtils.HabitRequestCreator;
 import com.motivaa.TestUtils.TestUtils;
 import com.motivaa.control.HabitCreationService;
+import com.motivaa.control.HabitFinderService;
 import com.motivaa.control.UserFinder;
 import com.motivaa.control.error_handling.exceptions.FieldCustomValidationException;
 import com.motivaa.control.error_handling.exceptions.NotFoundException;
@@ -13,7 +14,6 @@ import com.motivaa.entity.NotDaySpecificHabit;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -21,12 +21,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
 import java.util.HashMap;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Log4j2
 @WebMvcTest(HabitController.class)
@@ -36,6 +38,8 @@ public class HabitControllerTest {
     HabitCreationService habitCreationService;
     @MockBean
     UserFinder userFinder;
+    @MockBean
+    HabitFinderService habitFinderService;
     @Autowired
     private MockMvc mockMvc;
 

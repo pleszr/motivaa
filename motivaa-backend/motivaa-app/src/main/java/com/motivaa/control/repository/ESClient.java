@@ -65,5 +65,20 @@ public class ESClient {
                         .document(habit));
         }
 
+        public List<Habit> searchHabitByUserUuid(String userUuid) throws java.io.IOException {
+                SearchResponse<Habit> searchResponse = esClient.search(s -> s
+                        .index("habit")
+                        .query(q -> q
+                                .match(m -> m
+                                .field("userUuid")
+                                .query(userUuid)
+                        )
+                ),Habit.class);
+                List<Hit<Habit>> hits = searchResponse.hits().hits();
+                return hits.stream().map(Hit::source).toList();
+        }
+
+
+
 
 }
