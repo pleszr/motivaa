@@ -18,7 +18,7 @@ COPY ../postcss.config.mjs ./
 COPY ../tailwind.config.js ./
 COPY ../mocker.mjs ./
 COPY ../index.html ./
-COPY ../.env.local ./
+COPY ../.env ./
 COPY ../jsconfig.json ./
 COPY . .
 

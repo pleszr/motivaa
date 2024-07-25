@@ -47,6 +47,8 @@ services:
       - ./keycloak-themes/themes:/opt/keycloak/themes
       - ./keycloak-themes/providers:/opt/keycloak/providers
       - ./import:/opt/keycloak/data/import
+      - ./keycloak-db/h2:/opt/keycloak/data/h2
+      - ./keycloak-db/import:/opt/keycloak/data/import
     command: ["start-dev", "--import-realm", "--verbose"]
     ports:
       - "8080:8080"
