@@ -1,4 +1,4 @@
-package com.motivaa.boundary;
+package com.motivaa.TestUtils;
 
 import lombok.Data;
 

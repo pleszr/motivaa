@@ -3,7 +3,7 @@
     <module name="motivaa-app" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.motivaa.*" />
+        <option name="PATTERN" value="com.motivaa.TestUtils.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

@@ -1,9 +1,14 @@
 package com.motivaa.control;
 
-import com.motivaa.control.errorHandling.exceptions.RepositoryException;
+import com.motivaa.control.error_handling.exceptions.RepositoryException;
 import com.motivaa.control.repository.MotivaaRepository;
 import com.motivaa.entity.User;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -11,13 +16,9 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doThrow;
-
 @SpringBootTest
 @ActiveProfiles("test")
-public class UserCreationServiceTest {
+class UserCreationServiceTest {
     String validEmail = "unit@test.com";
     String validFirstName = "Unit";
     String validLastName = "Test";

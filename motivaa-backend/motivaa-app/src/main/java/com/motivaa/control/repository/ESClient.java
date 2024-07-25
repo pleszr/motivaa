@@ -23,7 +23,7 @@ import java.util.UUID;
 @Log4j2
 public class ESClient {
         @Value("${elasticsearch.host}")
-        String ES_HOST;
+        String esHost;
         RestClient restClient;
         ElasticsearchTransport transport;
         ElasticsearchClient esClient;
@@ -31,7 +31,7 @@ public class ESClient {
         @PostConstruct
         public void init() {
                 restClient = RestClient
-                        .builder(HttpHost.create(ES_HOST))
+                        .builder(HttpHost.create(esHost))
                         .build();
                 transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
                 esClient = new ElasticsearchClient(transport);

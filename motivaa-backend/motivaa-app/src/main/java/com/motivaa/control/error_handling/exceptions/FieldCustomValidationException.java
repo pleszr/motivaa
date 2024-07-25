@@ -1,4 +1,4 @@
-package com.motivaa.control.errorHandling.exceptions;
+package com.motivaa.control.error_handling.exceptions;
 
 public class FieldCustomValidationException extends RuntimeException{
 

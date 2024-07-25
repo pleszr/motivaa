@@ -1,6 +1,6 @@
 package com.motivaa.control;
 
-import com.motivaa.control.errorHandling.exceptions.RepositoryException;
+import com.motivaa.control.error_handling.exceptions.RepositoryException;
 import com.motivaa.control.repository.MotivaaRepository;
 import com.motivaa.entity.User;
 import lombok.extern.log4j.Log4j2;

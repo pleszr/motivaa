@@ -1,8 +1,8 @@
-package com.motivaa.control.errorHandling;
+package com.motivaa.control.error_handling;
 
-import com.motivaa.control.errorHandling.exceptions.FieldCustomValidationException;
-import com.motivaa.control.errorHandling.exceptions.NotFoundException;
-import com.motivaa.control.errorHandling.exceptions.RepositoryException;
+import com.motivaa.control.error_handling.exceptions.FieldCustomValidationException;
+import com.motivaa.control.error_handling.exceptions.NotFoundException;
+import com.motivaa.control.error_handling.exceptions.RepositoryException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,7 +86,7 @@ public class ControllerExceptionHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 exceptionUuid,
                 createNewErrorList(ERROR_MESSAGE_KEY, "Some error occurred on server, please try later."));
-        log.error("GlobalException: {}",ex.getMessage());
+        log.error("GlobalException: ",ex);
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
