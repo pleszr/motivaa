@@ -55,6 +55,7 @@ public class ESClient {
                 SearchResponse<User> searchResponse = esClient.search(s->s
                         .index("user"),User.class);
                 List<Hit<User>> hits = searchResponse.hits().hits();
+                log.info(searchResponse.hits().hits());
                 return hits.stream().map(Hit::source).toList();
         }
 
@@ -65,15 +66,14 @@ public class ESClient {
                         .document(habit));
         }
 
-        public List<Habit> searchHabitByUserUuid(String userUuid) throws java.io.IOException {
+        public List<Habit> searchHabitByUserUuid(UUID userUuid) throws java.io.IOException {
                 SearchResponse<Habit> searchResponse = esClient.search(s -> s
                         .index("habit")
-                        .query(q -> q
-                                .match(m -> m
-                                .field("userUuid")
-                                .query(userUuid)
-                        )
-                ),Habit.class);
+                                .query(q -> q
+                                                .match(t -> t
+                                                                .field("userUuid")
+                                                                .query(userUuid.toString())))
+                        ,Habit.class);
                 List<Hit<Habit>> hits = searchResponse.hits().hits();
                 return hits.stream().map(Hit::source).toList();
         }

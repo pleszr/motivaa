@@ -1,10 +1,12 @@
 package com.motivaa.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Setter
 public class DaySpecificHabit extends Habit {
@@ -20,8 +22,8 @@ public class DaySpecificHabit extends Habit {
         this.listOfRecurringDays = listOfRecurringDays;
     }
 
-    @Override
-    public String getRecurringTypeDetails() {
-        return String.join(";", listOfRecurringDays);
-    }
+//    @Override
+//    public String getRecurringTypeDetails() {
+//        return String.join(";", listOfRecurringDays);
+//    }
 }

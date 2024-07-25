@@ -17,10 +17,10 @@ public class NotDaySpecificHabit extends Habit {
         super(userUuid, name, recurringType, priority, color);
         this.numberOfOccasionsInWeek = numberOfOccasionsInWeek;
     }
-    @Override
-    public String getRecurringTypeDetails() {
-        return numberOfOccasionsInWeek.toString();
-    }
+//    @Override
+//    public String getRecurringTypeDetails() {
+//        return numberOfOccasionsInWeek.toString();
+//    }
 
 
 }

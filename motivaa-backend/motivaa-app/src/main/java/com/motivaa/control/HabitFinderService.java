@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @Service
@@ -21,7 +22,7 @@ public class HabitFinderService {
     public List<Habit> habitFinder(String userUuid) {
         List<Habit> habits;
         try {
-            habits = motivaaRepository.searchHabitByUserUuid(userUuid);
+            habits = motivaaRepository.searchHabitByUserUuid(UUID.fromString(userUuid));
         } catch (IOException e) {
             log.error("Repository exception. Stack trace:",e);
             throw new RepositoryException(MessageBundle.INTERNAL_ERROR_RESPONSE);

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class MotivaaRepository{
@@ -31,7 +32,7 @@ public class MotivaaRepository{
         esClient.saveHabit(habit);
     }
 
-    public List<Habit> searchHabitByUserUuid(String userUuid) throws IOException {
+    public List<Habit> searchHabitByUserUuid(UUID userUuid) throws IOException {
         return esClient.searchHabitByUserUuid(userUuid);
     }
 
