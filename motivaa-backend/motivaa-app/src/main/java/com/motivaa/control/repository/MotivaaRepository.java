@@ -10,30 +10,30 @@ import java.util.UUID;
 
 @Service
 public class MotivaaRepository{
-    ESClient esClient;
+    Elasticsearch elasticsearch;
 
-    MotivaaRepository(ESClient esClient){
-        this.esClient = esClient;
+    MotivaaRepository(Elasticsearch elasticsearch){
+        this.elasticsearch = elasticsearch;
     }
 
     public List<User> searchAllUsers() throws java.io.IOException{
-        return esClient.searchAllUsers();
+        return elasticsearch.searchAllUsers();
     }
 
     public void saveUser(User user) throws java.io.IOException {
-        esClient.saveUser(user);
+        elasticsearch.saveUser(user);
     }
 
     public User findUserByUuid(String uuid) throws java.io.IOException {
-        return esClient.findUserById(java.util.UUID.fromString(uuid));
+        return elasticsearch.findUserById(java.util.UUID.fromString(uuid));
     }
 
     public void saveHabit(Habit habit) throws java.io.IOException {
-        esClient.saveHabit(habit);
+        elasticsearch.saveHabit(habit);
     }
 
     public List<Habit> searchHabitByUserUuid(UUID userUuid) throws IOException {
-        return esClient.searchHabitByUserUuid(userUuid);
+        return elasticsearch.searchHabitByUserUuid(userUuid);
     }
 
 

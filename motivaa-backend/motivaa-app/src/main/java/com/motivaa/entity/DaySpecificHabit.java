@@ -1,5 +1,6 @@
 package com.motivaa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,8 +23,9 @@ public class DaySpecificHabit extends Habit {
         this.listOfRecurringDays = listOfRecurringDays;
     }
 
-//    @Override
-//    public String getRecurringTypeDetails() {
-//        return String.join(";", listOfRecurringDays);
-//    }
+    @JsonIgnore
+    @Override
+    public String getRecurringTypeDetails() {
+        return String.join(";", listOfRecurringDays);
+    }
 }

@@ -1,5 +1,6 @@
 package com.motivaa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
@@ -9,7 +10,6 @@ import java.util.UUID;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
         property = "habitType")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = DaySpecificHabit.class, name = "SPECIFIC_DAY"),
@@ -39,9 +39,9 @@ public abstract  class Habit {
         this.priority = priority;
         this.color = color;
     }
-
-//    public String getRecurringTypeDetails() {
-//        return "";
-//    }
+    @JsonIgnore
+    public String getRecurringTypeDetails() {
+        return "";
+    }
 
 }

@@ -19,6 +19,7 @@ public class HabitFinderService {
     public HabitFinderService(MotivaaRepository motivaaRepository) {
         this.motivaaRepository = motivaaRepository;
     }
+
     public List<Habit> habitFinder(String userUuid) {
         List<Habit> habits;
         try {

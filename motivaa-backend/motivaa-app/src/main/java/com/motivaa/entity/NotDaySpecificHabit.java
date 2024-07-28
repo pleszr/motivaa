@@ -1,8 +1,10 @@
 package com.motivaa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@NoArgsConstructor
 @Getter
 @Setter
 public class NotDaySpecificHabit extends Habit {
@@ -17,10 +19,11 @@ public class NotDaySpecificHabit extends Habit {
         super(userUuid, name, recurringType, priority, color);
         this.numberOfOccasionsInWeek = numberOfOccasionsInWeek;
     }
-//    @Override
-//    public String getRecurringTypeDetails() {
-//        return numberOfOccasionsInWeek.toString();
-//    }
+    @JsonIgnore
+    @Override
+    public String getRecurringTypeDetails() {
+        return numberOfOccasionsInWeek.toString();
+    }
 
 
 }

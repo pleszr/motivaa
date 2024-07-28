@@ -88,8 +88,6 @@ public class HabitController {
     @GetMapping("/habits")
     public ResponseEntity<List<SearchHabitResponse>> searchHabitsByParameters(@RequestParam("userUuid") String userUuid) {
         UuidValidator.validateUuid(userUuid);
-
-
         List<Habit> habits =  habitFinderService.habitFinder(userUuid);
         List<SearchHabitResponse> dtoList =  habits.stream().map(SearchHabitResponse::fromHabit).toList();
         return ResponseEntity.ok(dtoList);

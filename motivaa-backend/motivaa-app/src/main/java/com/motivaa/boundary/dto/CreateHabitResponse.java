@@ -11,7 +11,7 @@ public class CreateHabitResponse {
     String userUuid;
     String name;
     String recurringType;
-    //String recurringDetails;
+    String recurringDetails;
     Integer priority;
     String color;
 
@@ -20,7 +20,7 @@ public class CreateHabitResponse {
         this.userUuid = habit.getUserUuid();
         this.name = habit.getName();
         this.recurringType = habit.getRecurringType();
-        //this.recurringDetails = habit.getRecurringTypeDetails();
+        this.recurringDetails = habit.getRecurringTypeDetails();
         this.priority = habit.getPriority();
         this.color = habit.getColor();
     }

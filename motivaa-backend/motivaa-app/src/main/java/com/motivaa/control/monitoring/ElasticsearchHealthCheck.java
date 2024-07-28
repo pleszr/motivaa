@@ -18,7 +18,7 @@ public class ElasticsearchHealthCheck {
     private String esStatus;
 
     @Value("${elasticsearch.host}")
-    String ELASTICSEARCH_HOST;
+    String elasticsearchHost;
 
     public void checkElasticsearchHealth() {
         try {
@@ -39,7 +39,7 @@ public class ElasticsearchHealthCheck {
         requestFactory.setConnectTimeout(5000);
         requestFactory.setReadTimeout(5000);
         RestTemplate restTemplate = new RestTemplate(requestFactory);
-        String healthCheckUrl = ELASTICSEARCH_HOST + "/_cluster/health";
+        String healthCheckUrl = elasticsearchHost + "/_cluster/health";
         ResponseEntity<String> esResponse = restTemplate.getForEntity(healthCheckUrl, String.class);
         esStatus = JsonPath.read(esResponse.getBody(), "$.status");
     }
