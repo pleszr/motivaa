@@ -1,6 +1,5 @@
 package com.motivaa.control.repository;
 
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.GetResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
@@ -21,12 +20,12 @@ import java.util.UUID;
 
 @Service
 @Log4j2
-public class ESClient {
+public class Elasticsearch {
         @Value("${elasticsearch.host}")
         String esHost;
         RestClient restClient;
         ElasticsearchTransport transport;
-        ElasticsearchClient esClient;
+        co.elastic.clients.elasticsearch.ElasticsearchClient esClient;
 
         @PostConstruct
         public void init() {
@@ -34,7 +33,7 @@ public class ESClient {
                         .builder(HttpHost.create(esHost))
                         .build();
                 transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
-                esClient = new ElasticsearchClient(transport);
+                esClient = new co.elastic.clients.elasticsearch.ElasticsearchClient(transport);
         }
 
         public void saveUser(User user) throws java.io.IOException{
@@ -55,6 +54,7 @@ public class ESClient {
                 SearchResponse<User> searchResponse = esClient.search(s->s
                         .index("user"),User.class);
                 List<Hit<User>> hits = searchResponse.hits().hits();
+                log.info(searchResponse.hits().hits());
                 return hits.stream().map(Hit::source).toList();
         }
 
@@ -64,6 +64,20 @@ public class ESClient {
                         .id(habit.getUuid().toString())
                         .document(habit));
         }
+
+        public List<Habit> searchHabitByUserUuid(UUID userUuid) throws java.io.IOException {
+                SearchResponse<Habit> searchResponse = esClient.search(s -> s
+                        .index("habit")
+                                .query(q -> q
+                                                .match(t -> t
+                                                                .field("userUuid")
+                                                                .query(userUuid.toString())))
+                        ,Habit.class);
+                List<Hit<Habit>> hits = searchResponse.hits().hits();
+                return hits.stream().map(Hit::source).toList();
+        }
+
+
 
 
 }

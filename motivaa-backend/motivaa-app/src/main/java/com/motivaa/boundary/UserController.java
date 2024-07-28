@@ -1,7 +1,7 @@
 package com.motivaa.boundary;
 
 import com.motivaa.boundary.dto.*;
-import com.motivaa.boundary.validators.FindUserByUuidRequestValidator;
+import com.motivaa.boundary.validators.UuidValidator;
 import com.motivaa.control.UserCreationService;
 import com.motivaa.control.UserFinder;
 import com.motivaa.entity.User;
@@ -101,7 +101,7 @@ public class UserController {
     })
     @GetMapping("/users/{userUuid}")
     public ResponseEntity<FindUserByUuidResponse> findUserByUuid(@PathVariable("userUuid") String userUuid) {
-        FindUserByUuidRequestValidator.validateRequest(userUuid);
+        UuidValidator.validateUuid(userUuid);
         User user = userFinder.findUserByUuid(userUuid);
         return ResponseEntity.ok(FindUserByUuidResponse.fromUser(user));
     }

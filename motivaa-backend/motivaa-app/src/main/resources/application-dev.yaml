@@ -7,7 +7,7 @@ spring:
       ddl-auto: none
 
 elasticsearch:
-  host: http://elasticsearch:9200
+  host: ${ELASTICSEARCH_HOST:http://elasticsearch:9200}
 
 monitoring:
   esHealthCheckInterval: 60000

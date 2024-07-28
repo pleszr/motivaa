@@ -8,6 +8,7 @@ import com.motivaa.control.UserFinder;
 import com.motivaa.control.error_handling.exceptions.FieldCustomValidationException;
 import com.motivaa.control.error_handling.exceptions.NotFoundException;
 import com.motivaa.control.error_handling.exceptions.RepositoryException;
+import com.motivaa.control.utility.MessageBundle;
 import com.motivaa.entity.User;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -319,7 +320,7 @@ public class UserControllerTest {
         void get_Users_userUuid_InvalidUuidLength() throws Exception {
             String uuid_invalid_length = "invalid-uuid-length";
             when(userFinder.findUserByUuid(uuid_invalid_length))
-                    .thenThrow(new FieldCustomValidationException("Invalid UUID length"));
+                    .thenThrow(new FieldCustomValidationException(MessageBundle.INVALID_UUID_FORMAT_ERROR_MESSAGE));
 
             String responseJson = mockMvc.perform(MockMvcRequestBuilders.get("/user-apis/users/" + uuid_invalid_length)
                             .accept(MediaType.APPLICATION_JSON))
@@ -328,7 +329,7 @@ public class UserControllerTest {
 
             String errorFromJson = JsonPath.parse(responseJson).read("$.errors[0].value");
             assertEquals(
-                    "Invalid UUID length",
+                    MessageBundle.INVALID_UUID_FORMAT_ERROR_MESSAGE,
                     errorFromJson);
 
             Integer httpCodeFromJson = JsonPath.parse(responseJson).read("$.httpCode");
