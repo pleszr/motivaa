@@ -18,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,13 +43,13 @@ public class HabitFinderServiceTest {
 
             when(motivaaRepository.searchHabitByUserUuid(
                     UUID.fromString(HabitFactory.VALID_USER_UUID))
-            ).thenReturn(new ArrayList<>(originalHabitList));
+            ).thenReturn(originalHabitList);
 
             List<Habit> returnedHabitList = habitFinderService.habitFinder(HabitFactory.VALID_USER_UUID);
 
-            assertArrayEquals(
-                    originalHabitList.toArray(),
-                    returnedHabitList.toArray()
+            assertEquals(
+                    originalHabitList,
+                    returnedHabitList
             );
 
             returnedHabitList.forEach(
@@ -60,7 +61,7 @@ public class HabitFinderServiceTest {
         void search_with_no_results_should_give_back_an_empty_list() throws Exception {
             when(motivaaRepository.searchHabitByUserUuid(
                     UUID.fromString(HabitFactory.VALID_USER_UUID))
-            ).thenReturn(new ArrayList<>());
+            ).thenReturn(Collections.emptyList());
 
             List<Habit> returnedHabitList = habitFinderService.habitFinder(HabitFactory.VALID_USER_UUID);
 

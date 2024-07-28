@@ -54,7 +54,7 @@ public class Elasticsearch {
                 SearchResponse<User> searchResponse = esClient.search(s->s
                         .index("user"),User.class);
                 List<Hit<User>> hits = searchResponse.hits().hits();
-                log.info(searchResponse.hits().hits());
+                log.info("ES search for all users: {}",hits);
                 return hits.stream().map(Hit::source).toList();
         }
 
@@ -74,6 +74,7 @@ public class Elasticsearch {
                                                                 .query(userUuid.toString())))
                         ,Habit.class);
                 List<Hit<Habit>> hits = searchResponse.hits().hits();
+                log.info("ES search for habits by userUuid: {}",hits);
                 return hits.stream().map(Hit::source).toList();
         }
 

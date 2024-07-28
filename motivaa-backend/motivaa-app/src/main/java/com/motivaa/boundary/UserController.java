@@ -78,11 +78,11 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<List<SearchAllUsersResponse>> searchAllUsers() {
         List<User> users = userFinder.searchAllUsers();
-        List<SearchAllUsersResponse> dtoList = users.stream().map(SearchAllUsersResponse::fromUser).toList();
-        if (dtoList.isEmpty()) {
+        List<SearchAllUsersResponse> responseList = users.stream().map(SearchAllUsersResponse::fromUser).toList();
+        if (responseList.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(dtoList);
+        return ResponseEntity.ok(responseList);
     }
 
     @Operation(summary = "Find user by UUID")

@@ -89,9 +89,9 @@ public class HabitController {
         log.info("Habit search for userUuid: {}", userUuid);
         UuidValidator.validateUuid(userUuid);
         List<Habit> habits =  habitFinderService.habitFinder(userUuid);
-        List<SearchHabitResponse> dtoList =  habits.stream().map(SearchHabitResponse::fromHabit).toList();
-        log.info("Habit search for userUuid: {} finished with details: {}", userUuid, dtoList);
-        return ResponseEntity.ok(dtoList);
+        List<SearchHabitResponse> responseList =  habits.stream().map(SearchHabitResponse::fromHabit).toList();
+        log.info("Habit search for userUuid: {} finished with details: {}", userUuid, responseList);
+        return ResponseEntity.ok(responseList);
     }
 
 }
