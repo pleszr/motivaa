@@ -9,6 +9,7 @@ import com.motivaa.control.HabitFinderService;
 import com.motivaa.entity.Habit;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -76,20 +77,20 @@ public class HabitController {
             @ApiResponse(
                     responseCode = "200",
                     description = "Habits",
-                    content = {
-                            @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = CreateHabitResponse.class))
-                    }),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "User not found for the given userUuid",
-                    content = @Content),
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(
+                                    uniqueItems = true,
+                                    schema = @Schema(implementation = SearchHabitResponse.class)))
+            )
     })
     @GetMapping("/habits")
     public ResponseEntity<List<SearchHabitResponse>> searchHabitsByParameters(@RequestParam("userUuid") String userUuid) {
+        log.info("Habit search for userUuid: {}", userUuid);
         UuidValidator.validateUuid(userUuid);
         List<Habit> habits =  habitFinderService.habitFinder(userUuid);
         List<SearchHabitResponse> dtoList =  habits.stream().map(SearchHabitResponse::fromHabit).toList();
+        log.info("Habit search for userUuid: {} finished with details: {}", userUuid, dtoList);
         return ResponseEntity.ok(dtoList);
     }
 
