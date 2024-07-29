@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -24,6 +25,5 @@ public class NotDaySpecificHabit extends Habit {
     public String getRecurringTypeDetails() {
         return numberOfOccasionsInWeek.toString();
     }
-
 
 }

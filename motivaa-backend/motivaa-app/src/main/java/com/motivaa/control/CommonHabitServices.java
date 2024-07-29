@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
+import java.util.Calendar;
+
 @Service
 @Log4j2
 public class CommonHabitServices {
@@ -64,6 +66,13 @@ public class CommonHabitServices {
         if (numberOfOccasionsInWeek == null) {
             throw new FieldCustomValidationException(MessageBundle.NUMBER_OF_OCCASIONS_MANDATORY_NON_SPECIFIC_DAY);
         }
+    }
+
+    public String generateWeekId() {
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        int currentWeek = calendar.get(Calendar.WEEK_OF_YEAR);
+        return currentYear + "#" + currentWeek;
     }
 
 }
