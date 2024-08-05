@@ -15,60 +15,60 @@ import java.util.Map;
 
 @Log4j2
 public class ExcelOnModulesTest  {
-    String ENVIRONMENT_HOST;
-    final String BROWSER_ENDPOINT_FOR_COOKIES = "/page/public/en/US/process/enter/ExcelsOnModulesTestProcess?productId=ExcelsOnModulesTest&activeZone=MyZone";
-    final String PROCESS_START_ENDPOINT = "/api/v2/public/en/US/process/start?processTextId=ExcelsOnModulesTestProcess&modelTextId=ExcelsOnModulesTest&activeZone=MyZone";
-    final String PROCESS_UPDATE_ENDPOINT = "/api/v2/public/en/US/process/{processUuid}/update?stepId=Process:1";
+    String environmentHost;
+    final String browserEndpointForCookies = "/page/public/en/US/process/enter/ExcelsOnModulesTestProcess?productId=ExcelsOnModulesTest&activeZone=MyZone";
+    final String processStartEndpoint = "/api/v2/public/en/US/process/start?processTextId=ExcelsOnModulesTestProcess&modelTextId=ExcelsOnModulesTest&activeZone=MyZone";
+    final String processUpdateEndpoint = "/api/v2/public/en/US/process/{processUuid}/update?stepId=Process:1";
     String jSessionId;
-    final boolean shouldRequestBeLogged = true;
 
     @BeforeTest
     @Parameters({ "ENVIRONMENT_HOST"})
-    void init(@Optional("https://skyeqa2.ext.saas1.innoveo-skye.net") String ENVIRONMENT_HOST){
-        this.ENVIRONMENT_HOST = ENVIRONMENT_HOST;
+    void init(@Optional("https://skyeqa2.ext.saas1.innoveo-skye.net") String environmentHost){
+        this.environmentHost = environmentHost;
         jSessionId = CookieHandler.retrieveJSessionIdCookie(
-                ENVIRONMENT_HOST,
-                BROWSER_ENDPOINT_FOR_COOKIES,
-                shouldRequestBeLogged);
+                environmentHost,
+                browserEndpointForCookies);
     }
 
     @Test
-    void testExcels() {
-        final String TESTED_EXCEL = "ExcelAttributeOnParent_InputOutputsOnParentExcel";
-        final String EXCEL_INPUT_ATTRIBUTE = "ExcelsOnModulesTest.ExcelAttributeOnParent_InputOutputsOnParent.input1_triggersExcel_notOptional";
-        final String EXCEL_OUTPUT_ATTRIBUTE = "ExcelsOnModulesTest.ExcelAttributeOnParent_InputOutputsOnParent.output1_shouldBeSameAsInput1";
-        final String TESTED_VALUE = "1";
+    void ExcelAttributeOnParent_InputOutputsOnParent() {
+        final String testedExcel = "ExcelAttributeOnParent_InputOutputsOnParentExcel";
+        final String excelInputAttribute = "ExcelsOnModulesTest.ExcelAttributeOnParent_InputOutputsOnParent.input1_triggersExcel_notOptional";
+        final String excelOutputAttribute = "ExcelsOnModulesTest.ExcelAttributeOnParent_InputOutputsOnParent.output1_shouldBeSameAsInput1";
+        final String testedValue = "1";
         //Tested logic: Excel should copy the input value to the output value when the input value is set
 
         String processStart_responseBody = RequestMaker.initiateGetRequest(
-                ENVIRONMENT_HOST,
-                PROCESS_START_ENDPOINT,
+                environmentHost,
+                processStartEndpoint,
                 jSessionId,
-                shouldRequestBeLogged);
+                "Error while creating the process object");
 
         String processUuid = TestUtils.retrieveProcessUuidFromResponseBody(processStart_responseBody);
         List<Map<String, String>> lockVersions = TestUtils.retrieveLockVersionsFromResponseBody(processStart_responseBody);
 
         Map<String, List<String>> updateMap = TestUtils.createUpdateMapFromAttributeIdAndValue(
-                EXCEL_INPUT_ATTRIBUTE,
-                TESTED_VALUE);
+                excelInputAttribute,
+                testedValue);
 
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("updateMap", updateMap);
         requestBody.put("lockVersions", lockVersions);
 
         String responseFromFirstUpdate = RequestMaker.updateExistingProcessObject(
-                ENVIRONMENT_HOST,
-                PROCESS_UPDATE_ENDPOINT,
+                environmentHost,
+                processUpdateEndpoint,
                 processUuid,
                 jSessionId,
                 requestBody,
-                shouldRequestBeLogged);
+                "Error when setting " + testedValue + " to " + excelInputAttribute);
+
+        String assertionErrorMessage = String.format("When %s gets a value, %s should copy the value to %s", excelInputAttribute, testedExcel, excelOutputAttribute);
 
         TestUtils.assertJsonPathValue(
                 responseFromFirstUpdate,
-                "ExcelsOnModulesTest.ExcelAttributeOnParent_InputOutputsOnParent.output1_shouldBeSameAsInput1",
-                TESTED_VALUE,
-                String.format("When %s gets a value, %s should copy the value to %s", EXCEL_INPUT_ATTRIBUTE, TESTED_EXCEL, EXCEL_OUTPUT_ATTRIBUTE));
+                excelOutputAttribute,
+                testedValue,
+                assertionErrorMessage);
     }
 }

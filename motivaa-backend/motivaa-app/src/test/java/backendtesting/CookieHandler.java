@@ -4,57 +4,36 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j2;
 
-import java.util.Arrays;
+import java.net.HttpCookie;
 
 @Log4j2
 public class CookieHandler {
-    public static String retrieveJSessionIdCookie(String ENVIRONMENT_HOST,
-                                                  String endpoint,
-                                                  Boolean shouldRequestBeLogged) {
+    public static String retrieveJSessionIdCookie(String environmentHost,
+                                                  String endpoint) {
 
         Response initialRequestResponse = initiateInitialRequest(
-                ENVIRONMENT_HOST,
-                endpoint,
-                shouldRequestBeLogged
-        );
+                environmentHost,
+                endpoint);
         return extractCookieFromResponseHeader(initialRequestResponse);
     }
 
-    private static Response initiateInitialRequest(
-            String ENVIRONMENT_HOST,
-            String endpoint,
-            Boolean logEnabled) {
-        if (logEnabled) {
-            return RestAssured.given()
-                    .log().all()
-                    .get(ENVIRONMENT_HOST+endpoint)
+    private static Response initiateInitialRequest(String environmentHost,
+                                                   String endpoint) {
+            return RestAssured
+                    .given()
+                        .log().ifValidationFails()
+                        .get(environmentHost+endpoint)
                     .then()
-                    .log().all()
-                    .statusCode(200)
-                    .extract()
-                    .response();
-        } else {
-            return RestAssured.given()
-                    .get(ENVIRONMENT_HOST+endpoint)
-                    .then()
-                    .statusCode(200)
-                    .extract().response();
-        }
+                        .log().ifValidationFails()
+                        .onFailMessage("Error while retrieving JSESSIONID cookie from the browser-friendly endpoint")
+                        .statusCode(200)
+                        .extract()
+                        .response();
     }
 
     private static String extractCookieFromResponseHeader (Response response) {
-        String jsessionId = null;
-
         String setCookieHeader = response.header("Set-Cookie");
-
-        if (setCookieHeader != null) {
-            jsessionId = Arrays.stream(setCookieHeader.split(";"))
-                    .map(String::trim)
-                    .filter(cookie -> cookie.startsWith("JSESSIONID"))
-                    .findFirst()
-                    .map(cookie -> cookie.split("=")[1])
-                    .orElse(null);
-        }
-        return jsessionId;
+        HttpCookie jsessionId = HttpCookie.parse(setCookieHeader).get(0);
+        return jsessionId.getValue();
     }
 }

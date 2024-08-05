@@ -9,58 +9,39 @@ public class RequestMaker {
     public static String initiateGetRequest(String host,
                                             String endpoint,
                                             String jSessionId,
-                                            boolean shouldRequestBeLogged) {
-        if (shouldRequestBeLogged) {
-            return RestAssured.given()
-                    .log().all()
+                                            String onFailMessage) {
+        return RestAssured.
+                given()
+                    .log().ifValidationFails()
                     .cookie("JSESSIONID", jSessionId)
                     .post(host+endpoint)
-                    .then()
-                    .statusCode(200)
-                    .log().all()
-                    .extract().response()
-                    .andReturn().asString();
-        } else {
-            return RestAssured.given()
-                    .cookie("JSESSIONID", jSessionId)
-                    .post(endpoint)
-                    .then()
+                .then()
+                    .onFailMessage(onFailMessage)
+                    .log().ifValidationFails()
                     .statusCode(200)
                     .extract().response()
                     .andReturn().asString();
-        }
     }
-
-
 
     public static String updateExistingProcessObject(String host,
                                                      String endpoint,
                                                      String processUuid,
                                                      String jSessionId,
                                                      Map<String,Object> requestBody,
-                                                     boolean shouldRequestBeLogged) {
+                                                     String onFailMessage) {
         String finalEndpoint = endpoint.replace("{processUuid}", processUuid);
-        if (shouldRequestBeLogged) {
-            return RestAssured.given()
-                    .log().all()
+        return RestAssured
+                .given()
+                    .log().ifValidationFails()
                     .contentType("application/json")
                     .cookie("JSESSIONID", jSessionId)
                     .body(requestBody)
                     .post(host+finalEndpoint)
-                    .then()
-                    .log().all()
-                    .extract().response()
-                    .andReturn().asString();
-        } else {
-            return RestAssured.given()
-                    .contentType("application/json")
-                    .cookie("JSESSIONID", jSessionId)
-                    .body(requestBody)
-                    .post(host+finalEndpoint)
-                    .then()
-                    .extract().response()
-                    .andReturn().asString();
-        }
+                .then()
+                    .log().ifValidationFails()
+                    .onFailMessage(onFailMessage)
+                    .statusCode(200)
+                    .extract().body().asString();
     }
 }
 
