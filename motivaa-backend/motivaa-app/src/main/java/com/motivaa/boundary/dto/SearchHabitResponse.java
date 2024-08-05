@@ -3,6 +3,7 @@ package com.motivaa.boundary.dto;
 import com.motivaa.entity.Habit;
 import lombok.Value;
 
+import java.util.List;
 import java.util.UUID;
 
 @Value
@@ -11,7 +12,7 @@ public class SearchHabitResponse {
     String userUuid;
     String name;
     String recurringType;
-    String recurringDetails;
+    List<String> recurringDetails;
     Integer priority;
     String color;
 

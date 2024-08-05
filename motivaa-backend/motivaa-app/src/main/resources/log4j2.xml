@@ -13,6 +13,10 @@
 <!--            <AppenderRef ref="Console"/>-->
 <!--        </Logger>-->
     </Loggers>
+    <Logger name="org.springframework.beans" level = "debug" additivity="true">
+        <AppenderRef ref="Console"/>
+    </Logger>
+
 </Configuration>
 
 

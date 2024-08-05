@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collections;
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -22,8 +25,8 @@ public class NotDaySpecificHabit extends Habit {
     }
     @JsonIgnore
     @Override
-    public String getRecurringTypeDetails() {
-        return numberOfOccasionsInWeek.toString();
+    public List<String> getRecurringTypeDetails() {
+        return Collections.singletonList(numberOfOccasionsInWeek.toString());
     }
 
 }

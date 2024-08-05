@@ -5,14 +5,15 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.EnumUtils;
 
-public class RecurringDaysValidator implements ConstraintValidator<ValidListOfRecurringDays, String> {
+import java.util.List;
+
+public class RecurringDaysValidator implements ConstraintValidator<ValidListOfRecurringDays, List<String>> {
 
     @Override
-    public boolean isValid(String recurringDays, ConstraintValidatorContext context) {
-        if (recurringDays == null)
+    public boolean isValid(List<String> recurringDays, ConstraintValidatorContext context) {
+        if (recurringDays == null || recurringDays.isEmpty())
             return true;
-        String[] recurringDaysList = recurringDays.split(";");
-        for (String day : recurringDaysList) {
+        for (String day : recurringDays) {
             if (!isValidEnum(day))
                 return false;
             }

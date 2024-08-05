@@ -15,5 +15,5 @@ public class HabitEntry {
     private UUID habitUuid;
     private String weekId;
     private String recurringType;
-    private List<WeeklyData> weeklyData;
+    private List<DailyData> weeklyData;
 }

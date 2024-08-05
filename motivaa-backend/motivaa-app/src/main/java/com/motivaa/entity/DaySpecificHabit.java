@@ -25,7 +25,7 @@ public class DaySpecificHabit extends Habit {
 
     @JsonIgnore
     @Override
-    public String getRecurringTypeDetails() {
-        return String.join(";", listOfRecurringDays);
+    public List<String> getRecurringTypeDetails() {
+        return listOfRecurringDays;
     }
 }

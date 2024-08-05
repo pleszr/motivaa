@@ -53,13 +53,13 @@ public class TestUtils {
     }
 
     public static void assertMissingField(String responseJson, String fieldName, String expectedMessage) {
-        String missingEmailFromJson = JsonPath.parse(responseJson)
+        String missingFieldFromJson = JsonPath.parse(responseJson)
                 .read("$.errors[?(@.key == '" + fieldName + "')].value")
                 .toString()
                 .replace("[\"", "")
                 .replace("\"]", "");
         assertEquals(
                 expectedMessage,
-                missingEmailFromJson);
+                missingFieldFromJson);
     }
 }

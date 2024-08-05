@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @JsonTypeInfo(
@@ -27,6 +29,7 @@ public abstract  class Habit {
     private String color;
 
 
+
     protected Habit(String userUuid,
                  String name,
                  String recurringType,
@@ -40,8 +43,8 @@ public abstract  class Habit {
         this.color = color;
     }
     @JsonIgnore
-    public String getRecurringTypeDetails() {
-        return "";
+    public List<String> getRecurringTypeDetails() {
+        return Collections.emptyList();
     }
 
 }

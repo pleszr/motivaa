@@ -7,6 +7,7 @@ import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import com.motivaa.entity.Habit;
+import com.motivaa.entity.HabitEntry;
 import com.motivaa.entity.User;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
@@ -15,6 +16,7 @@ import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,6 +78,13 @@ public class Elasticsearch {
                 List<Hit<Habit>> hits = searchResponse.hits().hits();
                 log.info("ES search for habits by userUuid: {}",hits);
                 return hits.stream().map(Hit::source).toList();
+        }
+
+        public void saveHabitEntry(HabitEntry habitEntry) throws IOException {
+                esClient.index(i ->i
+                        .index("habit_entry")
+                        .id(habitEntry.getUuid().toString())
+                        .document(habitEntry));
         }
 
 

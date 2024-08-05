@@ -19,6 +19,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
@@ -72,11 +74,11 @@ public class CommonHabitServicesTest {
 
     @Nested
     class ValidateRecurringFieldsForType {
-        String VALID_LIST_OF_RECURRING_DAYS = "MONDAY;TUESDAY;WEDNESDAY";
+        List<String> VALID_LIST_OF_RECURRING_DAYS = Arrays.asList("MONDAY","TUESDAY","WEDNESDAY");
         Integer VALID_NUMBER_OF_OCCASIONS_IN_WEEK = 3;
         String VALID_RECURRING_TYPE_SPECIFIC_DAY = "SPECIFIC_DAY";
         String VALID_RECURRING_TYPE_NON_SPECIFIC_DAY = "NON_SPECIFIC_DAY";
-        String NULL_LIST_OF_RECURRING_DAYS = null;
+        List<String> NULL_LIST_OF_RECURRING_DAYS = null;
         Integer NULL_NUMBER_OF_OCCASIONS_IN_WEEK = null;
 
         @Nested

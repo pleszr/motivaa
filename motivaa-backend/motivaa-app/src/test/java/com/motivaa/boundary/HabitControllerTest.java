@@ -12,6 +12,7 @@ import com.motivaa.entity.DaySpecificHabit;
 import com.motivaa.entity.Habit;
 import com.motivaa.entity.NotDaySpecificHabit;
 import lombok.extern.log4j.Log4j2;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.when;
@@ -22,13 +23,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 @Log4j2
 @WebMvcTest(HabitController.class)
@@ -52,13 +55,13 @@ public class HabitControllerTest {
             @Test
             void valid_specific_day_request_should_be_success() throws Exception {
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
 
                 Habit habit = new DaySpecificHabit(
                         HabitFactory.VALID_USER_UUID,
                         HabitFactory.VALID_NAME,
                         HabitFactory.VALID_RECURRING_TYPE_SPECIFIC_DAY,
-                        Arrays.asList(HabitFactory.VALID_LIST_OF_RECURRING_DAYS.split(";")),
+                        HabitFactory.VALID_LIST_OF_RECURRING_DAYS,
                         Integer.parseInt(HabitFactory.VALID_PRIORITY),
                         HabitFactory.VALID_COLOR
                 );
@@ -79,15 +82,15 @@ public class HabitControllerTest {
                         .andExpect(jsonPath("$.userUuid").value(HabitFactory.VALID_USER_UUID))
                         .andExpect(jsonPath("$.name").value(HabitFactory.VALID_NAME))
                         .andExpect(jsonPath("$.recurringType").value(HabitFactory.VALID_RECURRING_TYPE_SPECIFIC_DAY))
-                        .andExpect(jsonPath("$.recurringDetails").value(HabitFactory.VALID_LIST_OF_RECURRING_DAYS))
-                        .andExpect(jsonPath("$.priority").value(HabitFactory.VALID_PRIORITY))
-                        .andExpect(jsonPath("$.color").value(HabitFactory.VALID_COLOR));
+                        .andExpect(jsonPath("$.recurringDetails").value(containsInAnyOrder(HabitFactory.VALID_LIST_OF_RECURRING_DAYS.toArray())))                        .andExpect(jsonPath("$.priority").value(HabitFactory.VALID_PRIORITY))
+                        .andExpect(jsonPath("$.color").value(HabitFactory.VALID_COLOR))
+                        .andReturn().getResponse().getContentAsString();
             }
 
             @Test
             void valid_non_specific_day_request_should_be_success() throws Exception {
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_NON_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_NON_SPECIFIC_DAY();
 
                 Habit habit = new NotDaySpecificHabit(
                         HabitFactory.VALID_USER_UUID,
@@ -126,7 +129,7 @@ public class HabitControllerTest {
             @Test
             void missing_userUuid_should_give_error() throws Exception {
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.remove("userUuid");
 
                 performPostRequest(request)
@@ -137,7 +140,7 @@ public class HabitControllerTest {
             @Test
             void missing_name_should_give_error() throws Exception {
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.remove("name");
 
                 performPostRequest(request)
@@ -148,7 +151,7 @@ public class HabitControllerTest {
             @Test
             void missing_recurringType_should_give_error() throws Exception {
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.remove("recurringType");
 
                 performPostRequest(request)
@@ -159,7 +162,7 @@ public class HabitControllerTest {
             @Test
             void missing_all_fields_should_give_all_errors() throws Exception {
 
-                HashMap<String, String> request = new HashMap<>();
+                HashMap<String, Object> request = new HashMap<>();
 
                 performPostRequest(request)
                         .andExpect(status().isBadRequest())
@@ -176,7 +179,7 @@ public class HabitControllerTest {
             @Test
             void non_existing_userUuid_should_give_notFound() throws Exception {
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.put("numberOfOccasionsInWeek", HabitFactory.VALID_NUMBER_OF_OCCASIONS_IN_WEEK);
 
                 when(
@@ -198,8 +201,8 @@ public class HabitControllerTest {
             @Test
             void invalid_name_should_give_error() throws Exception {
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
-                request.put("name", "123");
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                request.put("name", "123#@!#@!#!@#!@#@!#@!###############################");
 
                 performPostRequest(request)
                         .andExpect(status().isBadRequest())
@@ -210,7 +213,7 @@ public class HabitControllerTest {
             void invalid_recurringType_should_give_error() throws Exception {
                 String INVALID_RECURRING_TYPE = "123";
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.put("recurringType", INVALID_RECURRING_TYPE);
 
                 performPostRequest(request)
@@ -220,9 +223,9 @@ public class HabitControllerTest {
 
             @Test
             void invalid_listOfRecurringDays_should_give_error() throws Exception {
-                String INVALID_LIST_OF_RECURRING_DAYS = "monday;123";
+                List<String> INVALID_LIST_OF_RECURRING_DAYS = Arrays.asList("MONDAY","123");
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.put("listOfRecurringDays", INVALID_LIST_OF_RECURRING_DAYS);
 
                 performPostRequest(request)
@@ -234,7 +237,7 @@ public class HabitControllerTest {
             void invalid_NumberOfOccasions_should_give_error() throws Exception {
                 String INVALID_NUMBER_OF_OCCASIONS_IN_WEEK = "8";
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_NON_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_NON_SPECIFIC_DAY();
                 request.put("numberOfOccasionsInWeek", INVALID_NUMBER_OF_OCCASIONS_IN_WEEK);
 
                 performPostRequest(request)
@@ -244,20 +247,31 @@ public class HabitControllerTest {
 
             @Test
             void empty_listOfRecurringDays_should_give_error_for_specific_day_request() throws Exception {
-                String EMPTY_LIST_OF_RECURRING_DAYS = "";
+                List<String> EMPTY_LIST_OF_RECURRING_DAYS = Collections.emptyList();
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                when(
+                        habitCreationService.createHabit(
+                                HabitFactory.VALID_USER_UUID,
+                                HabitFactory.VALID_NAME,
+                                HabitFactory.VALID_RECURRING_TYPE_SPECIFIC_DAY,
+                                EMPTY_LIST_OF_RECURRING_DAYS,
+                                null,
+                                Integer.parseInt(HabitFactory.VALID_PRIORITY),
+                                HabitFactory.VALID_COLOR))
+                        .thenThrow(new FieldCustomValidationException(MessageBundle.RECURRING_DAYS_MANDATORY_SPECIFIC_DAY));
+
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.put("listOfRecurringDays", EMPTY_LIST_OF_RECURRING_DAYS);
 
                 performPostRequest(request)
                         .andExpect(status().isBadRequest())
-                        .andExpect(jsonPath("$.errors[?(@.key=='listOfRecurringDays')].value").value(MessageBundle.INVALID_RECURRING_DAYS_RESPONSE));
+                        .andExpect(jsonPath("$.errors[?(@.key=='errorMessage')].value").value(MessageBundle.RECURRING_DAYS_MANDATORY_SPECIFIC_DAY));
             }
 
             @Test
             void filled_numberOfOccasions_should_give_error_for_specific_day_request() throws Exception {
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.put("numberOfOccasionsInWeek", HabitFactory.VALID_NUMBER_OF_OCCASIONS_IN_WEEK);
 
                 when(
@@ -279,7 +293,7 @@ public class HabitControllerTest {
 
             @Test
             void empty_numberOfOccasions_should_give_error_for_non_specific_day_request() throws Exception {
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_NON_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_NON_SPECIFIC_DAY();
                 request.put("numberOfOccasionsInWeek", null);
 
                 when(
@@ -300,9 +314,9 @@ public class HabitControllerTest {
 
             @Test
             void filled_listOfRecurringDays_should_give_error_for_non_specific_day_request() throws Exception {
-                String FILLED_LIST_OF_RECURRING_DAYS = HabitFactory.VALID_LIST_OF_RECURRING_DAYS;
+                List<String> FILLED_LIST_OF_RECURRING_DAYS = HabitFactory.VALID_LIST_OF_RECURRING_DAYS;
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_NON_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_NON_SPECIFIC_DAY();
                 request.put("listOfRecurringDays", FILLED_LIST_OF_RECURRING_DAYS);
 
                 when(
@@ -325,7 +339,7 @@ public class HabitControllerTest {
             void invalid_priority_should_give_error() throws Exception {
                 String INVALID_PRIORITY = "6";
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.put("priority", INVALID_PRIORITY);
 
                 performPostRequest(request)
@@ -337,7 +351,7 @@ public class HabitControllerTest {
             void invalid_color_should_give_error() throws Exception {
                 String INVALID_COLOR = "123";
 
-                HashMap<String, String> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
+                HashMap<String, Object> request = HabitFactory.createRequest_SUCCESS_SPECIFIC_DAY();
                 request.put("color", INVALID_COLOR);
 
                 performPostRequest(request)
@@ -372,14 +386,14 @@ public class HabitControllerTest {
                         .andExpect(jsonPath("$[0].userUuid").value(habit1.getUserUuid()))
                         .andExpect(jsonPath("$[0].name").value(habit1.getName()))
                         .andExpect(jsonPath("$[0].recurringType").value(habit1.getRecurringType()))
-                        .andExpect(jsonPath("$[0].recurringDetails").value(habit1.getRecurringTypeDetails()))
+                        .andExpect(jsonPath("$[0].recurringDetails").value(containsInAnyOrder(habit1.getRecurringTypeDetails().toArray())))
                         .andExpect(jsonPath("$[0].priority").value(habit1.getPriority()))
                         .andExpect(jsonPath("$[0].color").value(habit1.getColor()))
 
                         .andExpect(jsonPath("$[1].userUuid").value(habit2.getUserUuid()))
                         .andExpect(jsonPath("$[1].name").value(habit2.getName()))
                         .andExpect(jsonPath("$[1].recurringType").value(habit2.getRecurringType()))
-                        .andExpect(jsonPath("$[1].recurringDetails").value(habit2.getRecurringTypeDetails()))
+                        .andExpect(jsonPath("$[1].recurringDetails").value(containsInAnyOrder(habit2.getRecurringTypeDetails().toArray())))
                         .andExpect(jsonPath("$[1].priority").value(habit2.getPriority()))
                         .andExpect(jsonPath("$[1].color").value(habit2.getColor()));
             }
@@ -413,7 +427,7 @@ public class HabitControllerTest {
 
     }
 
-    private ResultActions performPostRequest(HashMap<String, String> request) throws Exception {
+    private ResultActions performPostRequest(HashMap<String, Object> request) throws Exception {
         String POST_HABIT_ENDPOINT = "/habit-apis/habits";
         return mockMvc.perform(post(POST_HABIT_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)

@@ -22,8 +22,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.Arrays;
-
 @SpringBootTest
 @ActiveProfiles("test")
 public class HabitCreationServiceTest {
@@ -32,6 +30,8 @@ public class HabitCreationServiceTest {
     private MotivaaRepository motivaaRepository;
     @MockBean
     private CommonHabitServices commonHabitServices;
+    @MockBean
+    private HabitEntryCreationService habitEntryCreationService;
 
     @Autowired
     HabitCreationService habitCreationService;
@@ -53,7 +53,7 @@ public class HabitCreationServiceTest {
                     HabitFactory.VALID_USER_UUID,
                     HabitFactory.VALID_NAME,
                     HabitFactory.VALID_RECURRING_TYPE_SPECIFIC_DAY,
-                    Arrays.asList(HabitFactory.VALID_LIST_OF_RECURRING_DAYS.split(";")),
+                    HabitFactory.VALID_LIST_OF_RECURRING_DAYS,
                     Integer.parseInt(HabitFactory.VALID_PRIORITY),
                     HabitFactory.VALID_COLOR));
 

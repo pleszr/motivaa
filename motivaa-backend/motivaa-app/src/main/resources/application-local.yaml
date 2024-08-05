@@ -12,3 +12,8 @@ elasticsearch:
 monitoring:
   esHealthCheckInterval: 60000
 
+#logging:
+#  level:
+#    org:
+#      springframework: DEBUG
+

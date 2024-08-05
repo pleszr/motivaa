@@ -9,10 +9,9 @@ import com.motivaa.entity.User;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-
-
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 @Service
 @Log4j2
@@ -37,7 +36,7 @@ public class CommonHabitServices {
 
     public void validateRecurringFieldsForType(
             String recurringType,
-            String listOfRecurringDays,
+            List<String> listOfRecurringDays,
             Integer numberOfOccasionsInWeek) {
         switch (recurringType) {
             case "SPECIFIC_DAY":
@@ -51,7 +50,7 @@ public class CommonHabitServices {
         }
     }
 
-    private void validateSpecificDay(String listOfRecurringDays, Integer numberOfOccasionsInWeek) {
+    private void validateSpecificDay(List<String> listOfRecurringDays, Integer numberOfOccasionsInWeek) {
         if (listOfRecurringDays == null || listOfRecurringDays.isEmpty()) {
             throw new FieldCustomValidationException(MessageBundle.RECURRING_DAYS_MANDATORY_SPECIFIC_DAY);
         }
@@ -59,7 +58,7 @@ public class CommonHabitServices {
             throw new FieldCustomValidationException(MessageBundle.NUMBER_OF_OCCASIONS_NOT_ALLOWED_SPECIFIC_DAY);
         }
     }
-    private void validateNonSpecificDay(String listOfRecurringDays, Integer numberOfOccasionsInWeek) {
+    private void validateNonSpecificDay(List<String> listOfRecurringDays, Integer numberOfOccasionsInWeek) {
         if (listOfRecurringDays != null) {
             throw new FieldCustomValidationException(MessageBundle.RECURRING_DAYS_IS_NOT_ALLOWED_SPECIFIC_DAY);
         }

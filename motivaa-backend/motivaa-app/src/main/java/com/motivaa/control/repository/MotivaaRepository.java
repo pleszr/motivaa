@@ -1,6 +1,7 @@
 package com.motivaa.control.repository;
 
 import com.motivaa.entity.Habit;
+import com.motivaa.entity.HabitEntry;
 import com.motivaa.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,10 @@ public class MotivaaRepository{
 
     public List<Habit> searchHabitByUserUuid(UUID userUuid) throws IOException {
         return elasticsearch.searchHabitByUserUuid(userUuid);
+    }
+
+    public void saveHabitEntry(HabitEntry habitEntry) throws IOException {
+        elasticsearch.saveHabitEntry(habitEntry);
     }
 
 

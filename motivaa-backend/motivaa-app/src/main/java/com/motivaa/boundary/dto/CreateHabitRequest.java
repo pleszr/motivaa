@@ -8,6 +8,7 @@ import com.motivaa.control.utility.MessageBundle;
 import com.motivaa.control.utility.PossibleColors;
 import com.motivaa.control.utility.PossibleDays;
 import com.motivaa.control.utility.PossibleRecurringTypes;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -15,6 +16,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class CreateHabitRequest {
@@ -46,11 +49,11 @@ public class CreateHabitRequest {
     String recurringType;
 
     @ValidListOfRecurringDays
-    @Schema(
-            description = "Recurring days of the habit. Expects a list of days separated by semi-colon (;). Mandatory if recurring type is specific_day",
-            example = "MONDAY;WEDNESDAY",
-            implementation = PossibleDays.class)
-    String listOfRecurringDays;
+    @ArraySchema(
+            schema = @Schema(
+            description = "Recurring days of the habit. Expects an array of days. Mandatory if recurring type is specific_day",
+            implementation = PossibleDays.class))
+    List<String> listOfRecurringDays;
 
     @Min(value = 1, message = MessageBundle.INVALID_NUMBER_OF_OCCASIONS_IN_WEEK_ERROR_MESSAGE)
     @Max(value = 7, message = MessageBundle.INVALID_NUMBER_OF_OCCASIONS_IN_WEEK_ERROR_MESSAGE)
