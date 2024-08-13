@@ -11,6 +11,57 @@ import java.util.Map;
 
 public class TestUtils {
 
+    public static final String LOCKVERSIONS = "lockVersions";
+    public static final String UPDATEMAP = "updateMap";
+
+
+    public static void updateProcessObjectAndVerifyOutputValues(String environmentHost,
+                                                                String processUpdateEndpoint,
+                                                                String jSessionId,
+                                                                ProcessObject processObject,
+                                                                String inputAttribute,
+                                                                String inputValue,
+                                                                List<OutputVerification> inputOutputExpectedValues) {
+
+            List<Map<String, String>> lockVersions = processObject.getLockVersions();
+            String processUuid = processObject.getProcessUuid();
+
+            Map<String, List<String>> updateMap = TestUtils.createUpdateMapFromAttributeIdAndValue(
+                    inputAttribute,
+                    inputValue);
+
+            Map<String, Object> requestBody = TestUtils.createRequestBodyFromUpdateMapAndLockVersions(
+                    updateMap,
+                    lockVersions);
+
+            String actualUpdateResponse = RequestMaker.updateExistingProcessObject(
+                    environmentHost,
+                    processUpdateEndpoint,
+                    processUuid,
+                    jSessionId,
+                    requestBody,
+                    "Error when setting " + inputAttribute + " to " + inputValue);
+
+
+
+            for (OutputVerification inputOutputExpectedValue : inputOutputExpectedValues) {
+                String outputAttribute = inputOutputExpectedValue.getOutputAttribute();
+                String expectedValue = inputOutputExpectedValue.getExpectedValue();
+
+                String actualValue = TestUtils.extractAttributeValueFromResponse(
+                        actualUpdateResponse,
+                        outputAttribute
+                        );
+
+                Assert.assertEquals(
+                            actualValue,
+                            inputOutputExpectedValue.getExpectedValue(),
+                            "When " + inputAttribute + " gets a value, then the value of " + outputAttribute + "should be: " + expectedValue);
+            }
+        }
+
+
+
     public static List<Map<String,String>> retrieveLockVersionsFromResponseBody(String responseBody) {
         return JsonPath.parse(responseBody).read("$.lockVersions");
     }
@@ -20,10 +71,8 @@ public class TestUtils {
         return jsonContext.read("$.uuid");
     }
 
-    public static void assertJsonPathValue(String responseBody,
-                                           String attributeFullTextIdPath,
-                                           String expectedValue,
-                                           String message) {
+    private static String extractAttributeValueFromResponse(String responseBody,
+                                                           String attributeFullTextIdPath) {
 
         String jsonPath = String.format("$..components[?(@.id=='%s')].value", attributeFullTextIdPath);
 
@@ -31,18 +80,29 @@ public class TestUtils {
         if (jsonPathResultAsList.isEmpty()) {
             Assert.fail("No value found for json path: " + jsonPath + " in response body: " + responseBody);
         }
-        String jsonPathResult = jsonPathResultAsList.get(0);
-        Assert.assertEquals(
-                jsonPathResult,
-                expectedValue,
-                message);
+
+        if (jsonPathResultAsList.size() > 1) {
+            Assert.fail("Multiple values found for json path: " + jsonPath + " in response body: " + responseBody);
+        }
+
+        return jsonPathResultAsList.get(0);
     }
 
-    public static Map<String,List<String>> createUpdateMapFromAttributeIdAndValue(String attributeFullTextIdPath, String value) {
+
+    private static Map<String,List<String>> createUpdateMapFromAttributeIdAndValue(String attributeFullTextIdPath, String value) {
         Map<String,List<String>> updateMap = new HashMap<>();
         updateMap.put(attributeFullTextIdPath, Arrays.asList(value));
         return updateMap;
     }
+
+    private static Map<String,Object> createRequestBodyFromUpdateMapAndLockVersions(Map<String,List<String>> updateMap, List<Map<String,String>> lockVersions) {
+        Map<String,Object> requestBody = new HashMap<>();
+        requestBody.put(UPDATEMAP, updateMap);
+        requestBody.put(LOCKVERSIONS, lockVersions);
+        return requestBody;
+    }
+
+
 }
 
 
